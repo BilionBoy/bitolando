@@ -1235,3 +1235,29 @@
   background: var(--surface);
 }
 .bito-video iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+
+/* ─── LOGO IMAGEM — troca por tema ───────────────────── */
+/* Logo imagem — sobrescreve o flex-column do texto original */
+.bito-logo {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  text-decoration: none;
+}
+.bito-logo::after { display: none; }
+
+.bito-logo img {
+  display: block;
+  height: 44px;
+  width: auto;
+  max-width: 220px;
+  object-fit: contain;
+}
+
+/* Light (padrão) */
+.bito-logo-dark  { display: none; }
+.bito-logo-light { display: block; }
+
+/* Dark */
+[data-theme="dark"] .bito-logo-dark  { display: block; }
+[data-theme="dark"] .bito-logo-light { display: none; }
