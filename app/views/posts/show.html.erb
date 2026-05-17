@@ -1,0 +1,72 @@
+<% content_for :title, "#{@post.titulo} · bitolando" %>
+<% content_for :description, @post.corpo.to_s.gsub(/[#*`]/, "").truncate(160) %>
+
+<%= render "shared/header", active_nav: :blog %>
+
+<article class="bito-article">
+  <%= link_to root_path, class: "bito-postback" do %>
+    <span class="arrow">←</span> blog
+  <% end %>
+
+  <div class="bito-postcat">
+    <%= link_to @post.categoria.nome, categoria_path(@post.categoria.slug) %>
+  </div>
+
+  <h1><%= @post.titulo %></h1>
+
+  <div class="bito-postmeta">
+    <% if @post.publicado_em %>
+      <span><%= l(@post.publicado_em, format: :long) %></span>
+      <span class="sep">·</span>
+    <% end %>
+    <span><%= @post.tempo_leitura_min %> min de leitura</span>
+  </div>
+
+  <hr class="meta-rule">
+
+  <%# Imagem de capa (Active Storage) %>
+  <% if @post.imagem.attached? %>
+    <div class="bito-post-cover">
+      <%= image_tag @post.imagem.variant(resize_to_limit: [1040, 600]),
+          alt: @post.titulo, loading: "lazy" %>
+    </div>
+  <% end %>
+
+  <%# Vídeo YouTube %>
+  <% if (vid_id = youtube_embed_id(@post.video_url)) %>
+    <div class="bito-video">
+      <iframe
+        src="https://www.youtube.com/embed/<%= vid_id %>"
+        title="<%= @post.titulo %>"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+        style="position:absolute;top:0;left:0;width:100%;height:100%;">
+      </iframe>
+    </div>
+  <% end %>
+
+  <%# Corpo em markdown %>
+  <div class="bito-prose">
+    <%= render_markdown(@post.corpo) %>
+  </div>
+
+  <footer class="bito-postfooter">
+    <% if @anterior %>
+      <div>
+        <div class="next-label"><span class="arrow">←</span> anterior</div>
+        <%= link_to @anterior.titulo, post_path(@anterior.slug), class: "next-title" %>
+      </div>
+    <% else %>
+      <div></div>
+    <% end %>
+    <% if @proximo %>
+      <div class="right">
+        <div class="next-label">próximo <span class="arrow">→</span></div>
+        <%= link_to @proximo.titulo, post_path(@proximo.slug), class: "next-title" %>
+      </div>
+    <% end %>
+  </footer>
+</article>
+
+<%= render "shared/footer" %>

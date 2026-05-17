@@ -1,0 +1,54 @@
+<% content_for :title, "#{@categoria.nome} · bitolando" %>
+
+<%= render "shared/header", active_nav: :blog %>
+
+<main class="bito-main">
+  <section class="bito-cat-hero">
+    <div class="bito-cat-path">
+      <span class="slash">/</span> <%= @categoria.nome %>
+    </div>
+    <% if @categoria.descricao.present? %>
+      <p class="bito-cat-desc"><%= @categoria.descricao %></p>
+    <% end %>
+    <div class="bito-cat-meta">
+      <span><%= @posts.size %> <%= @posts.size == 1 ? "entrada" : "entradas" %></span>
+      <% total_min = @posts.sum(&:tempo_leitura_min) %>
+      <span>·</span>
+      <span><%= total_min %> min de leitura</span>
+    </div>
+  </section>
+
+  <nav class="bito-cat-nav">
+    <%= link_to "todas", root_path %>
+    <span class="sep">·</span>
+    <% @todas_categorias.each_with_index do |cat, i| %>
+      <%= link_to cat.nome, categoria_path(cat.slug), class: (cat.id == @categoria.id ? "active" : nil) %>
+      <% if i < @todas_categorias.size - 1 %>
+        <span class="sep">·</span>
+      <% end %>
+    <% end %>
+  </nav>
+
+  <% @anos.each do |ano| %>
+    <% posts_do_ano = @posts.select { |p| p.publicado_em&.year == ano } %>
+    <div class="bito-archive-year">
+      <div class="bito-archive-year-head">
+        <span class="num"><%= ano %></span>
+        <span class="count"><%= posts_do_ano.size %> posts</span>
+      </div>
+      <ul class="bito-archive-list">
+        <% posts_do_ano.each_with_index do |post, i| %>
+          <li class="bito-archive-item" onclick="window.location='<%= post_path(post.slug) %>'">
+            <span class="num"><%= format("%03d", i + 1) %></span>
+            <span class="title"><%= post.titulo %></span>
+            <span class="cat"><%= @categoria.nome %></span>
+            <span class="date"><%= l(post.publicado_em, format: :short) if post.publicado_em %></span>
+            <span class="read"><%= post.tempo_leitura_min %> min</span>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+</main>
+
+<%= render "shared/footer" %>

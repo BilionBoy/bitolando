@@ -1,0 +1,9 @@
+# frozen_string_literal: true
+
+class <%= class_name %> < ApplicationRecord
+<% attributes.select(&:reference?).each do |attr| -%>
+  belongs_to :<%= attr.name %>
+<% end -%>
+
+  validates :id, presence: false # adicione validações aqui
+end

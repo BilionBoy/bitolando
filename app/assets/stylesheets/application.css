@@ -1,0 +1,17 @@
+/*
+ *= require_tree .
+ *= require_self
+ */
+
+/* Reset global — padrão light, dark é opt-in */
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background: #FAFAF8;
+}
+
+[data-theme="dark"] body,
+[data-theme="dark"] html {
+  background: #080808;
+}

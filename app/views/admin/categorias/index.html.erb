@@ -1,0 +1,42 @@
+<main class="bito-admin-main">
+  <div class="bito-admin-bread">
+    <span class="here">categorias</span>
+  </div>
+
+  <div class="bito-admin-pagehead">
+    <div>
+      <h1>categorias</h1>
+      <div class="meta" style="margin-top:8px;"><%= @categorias.size %> categorias</div>
+    </div>
+    <div class="bito-admin-actions">
+      <%= link_to "+ nova →", new_admin_categoria_path, class: "bito-btn accent" %>
+    </div>
+  </div>
+
+  <table class="bito-admin-table">
+    <thead>
+      <tr>
+        <th>id</th>
+        <th>nome</th>
+        <th>slug</th>
+        <th>posts</th>
+        <th style="text-align:right;">ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @categorias.each do |cat| %>
+        <tr>
+          <td class="num"><%= cat.id %></td>
+          <td class="title"><%= cat.nome %></td>
+          <td class="cat" style="font-family:var(--mono-font);"><%= cat.slug %></td>
+          <td><%= cat.posts.size %></td>
+          <td class="actions">
+            <%= link_to "editar", edit_admin_categoria_path(cat) %>
+            <%= link_to "excluir", admin_categoria_path(cat),
+                data: { turbo_method: :delete, turbo_confirm: "Excluir categoria #{cat.nome}?" } %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</main>

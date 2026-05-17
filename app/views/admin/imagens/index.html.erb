@@ -1,0 +1,74 @@
+<main class="bito-admin-main">
+  <div class="bito-admin-bread">
+    <span class="here">imagens</span>
+  </div>
+
+  <div class="bito-admin-pagehead">
+    <div>
+      <h1>imagens</h1>
+      <div class="meta" style="margin-top:8px;"><%= @imagens.size %> arquivos · use a URL no markdown do post</div>
+    </div>
+  </div>
+
+  <%# Upload form %>
+  <%= form_with model: [:admin, Imagem.new], multipart: true, class: "bito-admin-form", style: "margin-bottom:var(--s10);" do |f| %>
+    <div class="col-main">
+      <div class="bito-admin-row">
+        <div class="bito-field">
+          <%= f.label :arquivo, "arquivo (jpg, png, gif, webp)" %>
+          <%= f.file_field :arquivo, accept: "image/*", class: "bito-input" %>
+        </div>
+        <div class="bito-field">
+          <%= f.label :legenda, "legenda (opcional)" %>
+          <%= f.text_field :legenda, class: "bito-input", placeholder: "ex: fluxograma do sistema" %>
+        </div>
+      </div>
+    </div>
+    <div class="bito-admin-formfoot" style="grid-column:1/-1;">
+      <div></div>
+      <div class="right">
+        <%= f.submit "enviar imagem →", class: "bito-btn accent" %>
+      </div>
+    </div>
+  <% end %>
+
+  <%# Galeria %>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:var(--s6);">
+    <% @imagens.each do |img| %>
+      <% next unless img.arquivo.attached? %>
+      <div class="bito-admin-panel" style="padding:0;overflow:hidden;">
+        <%= image_tag img.arquivo.variant(resize_to_limit: [520, 320]),
+            style: "width:100%;height:180px;object-fit:cover;display:block;" %>
+        <div style="padding:16px;">
+          <% if img.legenda.present? %>
+            <div style="font-size:13px;color:var(--fg-soft);margin-bottom:8px;"><%= img.legenda %></div>
+          <% end %>
+          <div class="bito-field">
+            <label style="font-size:10px;">url para markdown</label>
+            <input
+              type="text"
+              class="bito-input"
+              style="font-family:var(--mono-font);font-size:11px;padding:8px 10px;"
+              value="![<%= img.legenda.presence || "imagem" %>](<%= url_for(img.arquivo) %>)"
+              readonly
+              onclick="this.select();document.execCommand('copy');this.style.borderColor='var(--accent)';"
+              title="clique para copiar"
+            >
+            <div class="hint">clique no campo para copiar</div>
+          </div>
+          <div style="margin-top:8px;text-align:right;">
+            <%= link_to "excluir", admin_imagem_path(img),
+                data: { turbo_method: :delete, turbo_confirm: "Excluir imagem?" },
+                style: "font-size:11px;color:var(--warn);" %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <% if @imagens.empty? %>
+    <div style="text-align:center;padding:var(--s16);color:var(--fg-fade);font-size:var(--t-sm);">
+      nenhuma imagem ainda · envie a primeira acima
+    </div>
+  <% end %>
+</main>

@@ -1,0 +1,16 @@
+<main class="bito-admin-main">
+  <div class="bito-admin-bread">
+    <%= link_to "posts", admin_posts_path %>
+    <span class="sep">/</span>
+    <span class="here">nova entrada</span>
+  </div>
+
+  <div class="bito-admin-pagehead">
+    <div>
+      <h1>nova entrada</h1>
+      <div class="meta" style="margin-top:8px;">rascunho</div>
+    </div>
+  </div>
+
+  <%= render "form", post: @post %>
+</main>

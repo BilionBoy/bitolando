@@ -1,0 +1,29 @@
+<%# frozen_string_literal: true %>
+<main class="bito-admin-main">
+  <div class="bito-admin-bread">
+    <%%= link_to t("activerecord.models.<%= singular_table_name %>.other"), <%= plural_table_name %>_path %>
+    <span class="sep">/</span>
+    <span class="here">#<%%= @<%= singular_table_name %>.id %></span>
+  </div>
+
+  <div class="bito-admin-pagehead">
+    <h1><%%= t("activerecord.models.<%= singular_table_name %>.one") %> #<%%= @<%= singular_table_name %>.id %></h1>
+    <div class="bito-admin-actions">
+      <%%= link_to "editar", edit_<%= singular_table_name %>_path(@<%= singular_table_name %>), class: "bito-btn" %>
+      <%%= link_to "excluir", <%= singular_table_name %>_path(@<%= singular_table_name %>),
+          data: { turbo_method: :delete, turbo_confirm: "Excluir?" },
+          class: "bito-btn danger" %>
+    </div>
+  </div>
+
+  <div class="bito-admin-panel" style="max-width:600px;">
+    <%- attributes.each do |attr| -%>
+    <div style="display:flex;gap:16px;padding:12px 0;border-bottom:1px solid var(--border);">
+      <span style="font-size:11px;color:var(--fg-soft);letter-spacing:0.08em;text-transform:uppercase;font-weight:600;min-width:140px;">
+        <%%= t("activerecord.attributes.<%= singular_table_name %>.<%= attr.name %>") %>
+      </span>
+      <span><%%= @<%= singular_table_name %>.<%= attr.name %> %></span>
+    </div>
+    <%- end -%>
+  </div>
+</main>

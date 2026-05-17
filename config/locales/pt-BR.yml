@@ -1,0 +1,188 @@
+pt-BR:
+  date:
+    abbr_day_names:
+      - dom
+      - seg
+      - ter
+      - qua
+      - qui
+      - sex
+      - sáb
+    abbr_month_names:
+      - ~
+      - jan
+      - fev
+      - mar
+      - abr
+      - mai
+      - jun
+      - jul
+      - ago
+      - set
+      - out
+      - nov
+      - dez
+    day_names:
+      - domingo
+      - segunda-feira
+      - terça-feira
+      - quarta-feira
+      - quinta-feira
+      - sexta-feira
+      - sábado
+    formats:
+      default: "%d/%m/%Y"
+      long: "%-d de %B de %Y"
+      short: "%-d %b"
+    month_names:
+      - ~
+      - janeiro
+      - fevereiro
+      - março
+      - abril
+      - maio
+      - junho
+      - julho
+      - agosto
+      - setembro
+      - outubro
+      - novembro
+      - dezembro
+    order:
+      - :day
+      - :month
+      - :year
+  time:
+    am: AM
+    formats:
+      default: "%d/%m/%Y %H:%M"
+      long: "%-d de %B de %Y, %H:%M"
+      short: "%-d %b %H:%M"
+    pm: PM
+  activerecord:
+    models:
+      post:
+        one: Post
+        other: Posts
+      categoria:
+        one: Categoria
+        other: Categorias
+      post_status:
+        one: Status
+        other: Status
+      usuario:
+        one: Usuário
+        other: Usuários
+    attributes:
+      post:
+        titulo: Título
+        slug: Slug
+        corpo: Conteúdo
+        tempo_leitura_min: Tempo de leitura (min)
+        publicado_em: Publicado em
+        categoria: Categoria
+        post_status: Status
+      categoria:
+        nome: Nome
+        slug: Slug
+        descricao: Descrição
+        posicao: Posição
+      post_status:
+        nome: Nome
+        posicao: Posição
+      usuario:
+        email: E-mail
+        password: Senha
+        password_confirmation: Confirmação de senha
+        current_password: Senha atual
+        remember_me: Lembrar de mim
+    errors:
+      messages:
+        record_invalid: "Validação falhou: %{errors}"
+        restrict_dependent_destroy:
+          has_one: Não é possível excluir o registro pois existe um %{record} dependente
+          has_many: Não é possível excluir o registro pois existem %{record} dependentes
+  errors:
+    format: "%{attribute} %{message}"
+    messages:
+      accepted: deve ser aceito
+      blank: não pode ficar em branco
+      confirmation: não é igual a %{attribute}
+      empty: não pode ficar vazio
+      equal_to: deve ser igual a %{count}
+      even: deve ser par
+      exclusion: não está disponível
+      greater_than: deve ser maior que %{count}
+      greater_than_or_equal_to: deve ser maior ou igual a %{count}
+      inclusion: não está incluído na lista
+      invalid: não é válido
+      less_than: deve ser menor que %{count}
+      less_than_or_equal_to: deve ser menor ou igual a %{count}
+      model_invalid: "Validação falhou: %{errors}"
+      not_a_number: não é um número
+      not_an_integer: deve ser um número inteiro
+      odd: deve ser ímpar
+      other_than: deve ser diferente de %{count}
+      present: deve ficar em branco
+      required: é obrigatório(a)
+      taken: já está em uso
+      too_long:
+        one: "é longo demais (máximo: 1 caractere)"
+        other: "é longo demais (máximo: %{count} caracteres)"
+      too_short:
+        one: "é curto demais (mínimo: 1 caractere)"
+        other: "é curto demais (mínimo: %{count} caracteres)"
+      wrong_length:
+        one: "não possui o tamanho esperado (1 caractere)"
+        other: "não possui o tamanho esperado (%{count} caracteres)"
+  helpers:
+    select:
+      prompt: Selecione...
+    submit:
+      create: Criar %{model}
+      submit: Salvar %{model}
+      update: Atualizar %{model}
+  devise:
+    confirmations:
+      confirmed: Sua conta foi confirmada com sucesso.
+      send_instructions: Em breve você receberá um e-mail com instruções para confirmação da sua conta.
+    failure:
+      already_authenticated: Você já está conectado.
+      inactive: Sua conta ainda não foi ativada.
+      invalid: "%{authentication_keys} ou senha inválidos."
+      locked: Sua conta está bloqueada.
+      last_attempt: "Você tem mais uma tentativa antes de sua conta ser bloqueada."
+      not_found_in_database: "%{authentication_keys} ou senha inválidos."
+      timeout: Sua sessão expirou. Por favor, entre novamente para continuar.
+      unauthenticated: Você precisa entrar ou se registrar para continuar.
+      unconfirmed: Você precisa confirmar sua conta antes de continuar.
+    mailer:
+      confirmation_instructions:
+        subject: Instruções de confirmação
+      reset_password_instructions:
+        subject: Instruções para redefinição de senha
+      unlock_instructions:
+        subject: Instruções para desbloqueio
+    omniauth_callbacks:
+      failure: "Não foi possível autenticar você em %{kind} devido ao seguinte erro: \"%{reason}\"."
+      success: "Autenticado com sucesso pela conta %{kind}."
+    passwords:
+      no_token: Você só pode acessar essa página a partir de um link de redefinição de senha. Se você acessou através desse link, certifique-se de que a URL está completa.
+      send_instructions: Você receberá um e-mail com instruções para redefinição de sua senha em breve.
+      updated: Sua senha foi alterada com sucesso. Você está conectado.
+      updated_not_active: Sua senha foi alterada com sucesso.
+    registrations:
+      destroyed: Sua conta foi cancelada com sucesso.
+      signed_up: Bem-vindo! Você se registrou com sucesso.
+      signed_up_but_inactive: Você se registrou, mas ainda não pode entrar pois sua conta está inativa.
+      signed_up_but_locked: Você se registrou, mas ainda não pode entrar pois sua conta está bloqueada.
+      signed_up_but_unconfirmed: Uma mensagem com um link de confirmação foi enviada para o e-mail fornecido.
+      update_needs_confirmation: Você atualizou sua conta, mas precisamos confirmar o seu novo e-mail. Por favor, verifique sua caixa de entrada.
+      updated: Suas informações foram atualizadas com sucesso.
+    sessions:
+      signed_in: Conectado com sucesso.
+      signed_out: Você saiu com sucesso.
+      already_signed_out: Saiu com sucesso.
+    unlocks:
+      send_instructions: Você receberá um e-mail com instruções para desbloquear sua conta em breve.
+      unlocked: Sua conta foi desbloqueada com sucesso. Por favor, entre para continuar.

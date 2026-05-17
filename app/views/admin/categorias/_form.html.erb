@@ -1,0 +1,39 @@
+<%= form_with model: [:admin, categoria], class: "bito-admin-form" do |f| %>
+  <div class="col-main">
+    <div class="bito-field">
+      <%= f.label :nome, "nome" %>
+      <%= f.text_field :nome, class: "bito-input", placeholder: "ex: engenharia" %>
+    </div>
+    <div class="bito-field">
+      <%= f.label :slug, "slug" %>
+      <%= f.text_field :slug, class: "bito-input", placeholder: "auto-gerado",
+          style: "font-family:var(--mono-font);font-size:14px;" %>
+      <div class="hint">/categorias/<%= categoria.slug.presence || "—" %></div>
+    </div>
+    <div class="bito-field">
+      <%= f.label :descricao, "descrição" %>
+      <%= f.text_area :descricao, class: "bito-textarea", rows: 4,
+          placeholder: "breve descrição da categoria" %>
+    </div>
+  </div>
+
+  <aside class="col-side">
+    <% if categoria.errors.any? %>
+      <div class="bito-admin-panel" style="border-color:var(--warn-dim);">
+        <div class="bito-admin-panel-label" style="color:var(--warn);">erros</div>
+        <ul style="list-style:none;padding:0;margin:0;font-size:13px;color:var(--warn);">
+          <% categoria.errors.full_messages.each do |msg| %>
+            <li>· <%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  </aside>
+
+  <div class="bito-admin-formfoot">
+    <%= link_to "cancelar", admin_categorias_path, class: "bito-btn ghost" %>
+    <div class="right">
+      <%= f.submit class: "bito-btn accent" %>
+    </div>
+  </div>
+<% end %>

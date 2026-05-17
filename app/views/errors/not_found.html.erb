@@ -1,0 +1,13 @@
+<% content_for :title, "404 · bitolando" %>
+<%= render "shared/header", active_nav: nil %>
+
+<main class="bito-main" style="display:flex;flex-direction:column;align-items:flex-start;justify-content:center;min-height:60vh;padding-top:var(--s24);">
+  <div style="font-family:var(--mono-font);font-size:var(--t-xs);color:var(--fg-fade);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:var(--s4);">404</div>
+  <h1 style="font-size:var(--t-3xl);font-weight:700;letter-spacing:-0.024em;line-height:1.1;margin:0 0 var(--s6);color:var(--fg);">página não encontrada</h1>
+  <p style="color:var(--fg-soft);font-size:var(--t-base);max-width:48ch;margin:0 0 var(--s10);line-height:1.55;">
+    Essa rota não existe. Talvez o link esteja errado ou a página foi removida.
+  </p>
+  <%= link_to "← voltar ao blog", root_path, class: "bito-btn" %>
+</main>
+
+<%= render "shared/footer" %>

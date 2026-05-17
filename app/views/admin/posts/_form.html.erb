@@ -1,0 +1,110 @@
+<%= form_with model: [:admin, post], class: "bito-admin-form", multipart: true do |f| %>
+  <div class="col-main">
+    <div class="bito-field">
+      <%= f.label :titulo, "título" %>
+      <%= f.text_field :titulo, class: "bito-input", placeholder: "título da entrada",
+          style: "font-size:22px;font-weight:500;letter-spacing:-0.018em;padding:14px 16px;" %>
+    </div>
+
+    <div class="bito-admin-row">
+      <div class="bito-field">
+        <%= f.label :slug, "slug" %>
+        <%= f.text_field :slug, class: "bito-input", placeholder: "auto-gerado a partir do título",
+            style: "font-family:var(--mono-font);font-size:14px;" %>
+        <div class="hint">/posts/<%= post.slug.presence || "—" %></div>
+      </div>
+      <div class="bito-field">
+        <%= f.label :video_url, "vídeo (youtube)" %>
+        <%= f.url_field :video_url, class: "bito-input",
+            placeholder: "https://youtube.com/watch?v=...",
+            style: "font-family:var(--mono-font);font-size:14px;" %>
+        <div class="hint">cole a URL do youtube — gera embed automático</div>
+      </div>
+    </div>
+
+    <div class="bito-field">
+      <%= f.label :imagem, "imagem de capa" %>
+      <%= f.file_field :imagem, class: "bito-input", accept: "image/*" %>
+      <% if post.imagem.attached? %>
+        <div class="hint" style="display:flex;align-items:center;gap:8px;margin-top:4px;">
+          <%= image_tag post.imagem.variant(resize_to_limit: [120, 80]), style: "border-radius:4px;" %>
+          <span>imagem atual</span>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="bito-field">
+      <%= f.label :corpo, "conteúdo · markdown" %>
+      <%= f.text_area :corpo, class: "bito-textarea mono", rows: 24,
+          placeholder: "# Título\n\nParágrafo...\n\n## Seção\n\n```ruby\ncodigo\n```" %>
+      <div class="hint">markdown · h1-h6, **negrito**, *itálico*, `código`, blocos de código, tabelas, links</div>
+    </div>
+  </div>
+
+  <aside class="col-side">
+    <div class="bito-admin-panel">
+      <div class="bito-admin-panel-label">publicação</div>
+      <div class="bito-admin-radio">
+        <% Status.ordenados.each do |s| %>
+          <label class="<%= 'active' if post.status_id == s.id %>">
+            <%= f.radio_button :status_id, s.id, id: "status_#{s.id}" %>
+            <span><%= s.nome %></span>
+          </label>
+        <% end %>
+        <% if post.publicado_em %>
+          <div class="meta">em <%= l(post.publicado_em, format: :long) %></div>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="bito-admin-panel">
+      <div class="bito-admin-panel-label">categoria</div>
+      <div class="bito-field">
+        <%= f.select :categoria_id,
+            Categoria.ordenadas.map { |c| [c.nome, c.id] },
+            { prompt: "selecionar…" },
+            class: "bito-select" %>
+      </div>
+    </div>
+
+    <div class="bito-admin-panel">
+      <div class="bito-admin-panel-label">metadados</div>
+      <div style="display:flex;flex-direction:column;gap:10px;font-family:var(--mono-font);font-size:12px;color:var(--fg-soft);letter-spacing:0.02em;">
+        <div style="display:flex;justify-content:space-between;">
+          <span>id</span>
+          <span style="color:<%= post.new_record? ? 'var(--fg-fade)' : 'var(--accent)' %>;font-weight:600;">
+            <%= post.new_record? ? "—" : format("%03d", post.id) %>
+          </span>
+        </div>
+        <div style="display:flex;justify-content:space-between;">
+          <span>leitura</span>
+          <span style="color:var(--fg);"><%= post.tempo_leitura_min > 0 ? "#{post.tempo_leitura_min} min" : "—" %></span>
+        </div>
+        <div style="display:flex;justify-content:space-between;">
+          <span>criado</span>
+          <span><%= post.new_record? ? "agora" : l(post.created_at, format: :short) %></span>
+        </div>
+      </div>
+    </div>
+
+    <% if post.errors.any? %>
+      <div class="bito-admin-panel" style="border-color:var(--warn-dim);">
+        <div class="bito-admin-panel-label" style="color:var(--warn);">erros</div>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:6px;font-size:13px;color:var(--warn);">
+          <% post.errors.full_messages.each do |msg| %>
+            <li>· <%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  </aside>
+
+  <div class="bito-admin-formfoot">
+    <%= link_to "cancelar", admin_posts_path, class: "bito-btn ghost" %>
+    <div class="right">
+      <%= f.submit post.new_record? ? "criar rascunho" : "salvar", class: "bito-btn" %>
+      <%= f.submit post.new_record? ? "publicar agora →" : "publicar →",
+          name: "publicar", class: "bito-btn accent" %>
+    </div>
+  </div>
+<% end %>

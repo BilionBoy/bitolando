@@ -1,0 +1,17 @@
+# frozen_string_literal: true
+
+class <%= migration_class_name %> < ActiveRecord::Migration[<%= ActiveRecord::Migration.current_version %>]
+  def change
+    create_table :<%= table_name %> do |t|
+<% attributes.each do |attr| -%>
+<% if attr.reference? -%>
+      t.references :<%= attr.name %>, null: false, foreign_key: true
+<% else -%>
+      t.<%= attr.type %> :<%= attr.name %><%= attr.name.end_with?("nome", "name", "titulo", "title") ? ", null: false" : "" %>
+<% end -%>
+<% end -%>
+
+      t.timestamps
+    end
+  end
+end

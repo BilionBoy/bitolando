@@ -1,0 +1,11 @@
+<main class="bito-admin-main">
+  <div class="bito-admin-bread">
+    <%= link_to "categorias", admin_categorias_path %>
+    <span class="sep">/</span>
+    <span class="here">nova</span>
+  </div>
+  <div class="bito-admin-pagehead">
+    <h1>nova categoria</h1>
+  </div>
+  <%= render "form", categoria: @categoria %>
+</main>

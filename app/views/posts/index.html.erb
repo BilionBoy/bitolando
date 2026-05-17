@@ -1,0 +1,44 @@
+<% content_for :title, "bitolando" %>
+
+<%= render "shared/header", active_nav: :blog %>
+
+<main class="bito-main">
+  <% if @post_destaque %>
+    <section class="bito-featured" onclick="window.location='<%= post_path(@post_destaque.slug) %>'">
+      <div class="bito-featured-head">
+        <span class="cat"><%= @post_destaque.categoria.nome %></span>
+        <span class="date"><%= l(@post_destaque.publicado_em, format: :short) if @post_destaque.publicado_em %></span>
+      </div>
+      <h1 class="bito-featured-title"><%= @post_destaque.titulo %></h1>
+      <p class="bito-featured-preview"><%= @post_destaque.corpo.to_s.split("\n\n").first.to_s.truncate(280) %></p>
+      <span class="bito-featured-cta">ler<span class="arrow"> →</span></span>
+    </section>
+  <% end %>
+
+  <section class="bito-archive">
+    <div class="bito-archive-label">arquivo</div>
+
+    <% @anos.each do |ano| %>
+      <% posts_do_ano = @posts_arquivo.select { |p| p.publicado_em&.year == ano } %>
+      <div class="bito-archive-year">
+        <div class="bito-archive-year-head">
+          <span class="num"><%= ano %></span>
+          <span class="count"><%= posts_do_ano.size %> <%= posts_do_ano.size == 1 ? "post" : "posts" %></span>
+        </div>
+        <ul class="bito-archive-list">
+          <% posts_do_ano.each_with_index do |post, i| %>
+            <li class="bito-archive-item" onclick="window.location='<%= post_path(post.slug) %>'">
+              <span class="num"><%= format("%03d", i + 1) %></span>
+              <span class="title"><%= post.titulo %></span>
+              <span class="cat"><%= post.categoria.nome %></span>
+              <span class="date"><%= l(post.publicado_em, format: :short) if post.publicado_em %></span>
+              <span class="read"><%= post.tempo_leitura_min %> min</span>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  </section>
+</main>
+
+<%= render "shared/footer" %>

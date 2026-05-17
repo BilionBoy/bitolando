@@ -1,0 +1,54 @@
+<main class="bito-admin-main">
+  <div class="bito-admin-bread">
+    <span class="here">posts</span>
+  </div>
+
+  <div class="bito-admin-pagehead">
+    <div>
+      <h1>posts</h1>
+      <div class="meta" style="margin-top:8px;">
+        <%= @posts_publicados.size %> publicados · <%= @posts_rascunhos.size %> rascunhos
+      </div>
+    </div>
+    <div class="bito-admin-actions">
+      <%= link_to "+ nova entrada →", new_admin_post_path, class: "bito-btn accent" %>
+    </div>
+  </div>
+
+  <table class="bito-admin-table">
+    <thead>
+      <tr>
+        <th>id</th>
+        <th>título</th>
+        <th>categoria</th>
+        <th>status</th>
+        <th style="text-align:right;">publicado</th>
+        <th style="text-align:right;">ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% (@posts_rascunhos + @posts_publicados).each do |post| %>
+        <tr class="<%= 'draft' if post.rascunho? %>">
+          <td class="num"><%= post.id ? format("%03d", post.id) : "—" %></td>
+          <td class="title <%= 'draft' if post.rascunho? %>"><%= post.titulo %></td>
+          <td class="cat"><%= post.categoria.nome %></td>
+          <td>
+            <span class="bito-admin-status <%= post.rascunho? ? 'draft' : '' %>">
+              <%= post.status.nome %>
+            </span>
+          </td>
+          <td class="date">
+            <%= post.publicado_em ? l(post.publicado_em, format: :short) : "—" %>
+          </td>
+          <td class="actions">
+            <% if post.publicado? %>
+              <%= link_to "ver", post_path(post.slug), target: "_blank" %>
+            <% end %>
+            <%= link_to "editar", edit_admin_post_path(post) %>
+            <%= link_to "excluir", admin_post_path(post), data: { turbo_method: :delete, turbo_confirm: "Excluir este post?" } %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</main>

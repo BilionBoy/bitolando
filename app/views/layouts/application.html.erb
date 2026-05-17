@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+  <head>
+    <title><%= content_for(:title).presence || "bitolando" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="<%= content_for(:description).presence || "caderno público de engenharia e arquitetura de software" %>">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+    <script>
+      // Padrão: light. Admin tem data-theme="dark" fixo e não roda este script.
+      (function() {
+        var t = localStorage.getItem('bito-theme') || 'light';
+        document.documentElement.setAttribute('data-theme', t);
+      })();
+    </script>
+  </head>
+  <body>
+    <div class="bito">
+      <% if flash[:notice].present? %>
+        <div class="bito-flash notice"><%= flash[:notice] %></div>
+      <% end %>
+      <% if flash[:alert].present? %>
+        <div class="bito-flash alert"><%= flash[:alert] %></div>
+      <% end %>
+      <%= yield %>
+    </div>
+  </body>
+</html>

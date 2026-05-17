@@ -1,0 +1,31 @@
+<%# frozen_string_literal: true %>
+<%%= simple_form_for(<%= model_resource_name %>, wrapper: :bito) do |f| %>
+  <div class="bito-admin-form">
+    <div class="col-main">
+      <%%= f.error_notification %>
+      <%- attributes.each do |attribute| -%>
+        <%%= f.<%= attribute.reference? ? :association : :input %> :<%= attribute.name %> %>
+      <%- end -%>
+    </div>
+
+    <aside class="col-side">
+      <%% if <%= singular_table_name %>.errors.any? %>
+        <div class="bito-admin-panel" style="border-color:var(--warn-dim);">
+          <div class="bito-admin-panel-label" style="color:var(--warn);">erros</div>
+          <ul style="list-style:none;padding:0;margin:0;font-size:13px;color:var(--warn);">
+            <%% <%= singular_table_name %>.errors.full_messages.each do |msg| %>
+              <li>· <%%= msg %></li>
+            <%% end %>
+          </ul>
+        </div>
+      <%% end %>
+    </aside>
+
+    <div class="bito-admin-formfoot">
+      <%%= link_to "cancelar", <%= plural_table_name %>_path, class: "bito-btn ghost" %>
+      <div class="right">
+        <%%= f.button :submit, class: "bito-btn accent" %>
+      </div>
+    </div>
+  </div>
+<%% end %>

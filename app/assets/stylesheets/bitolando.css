@@ -1,0 +1,1237 @@
+/* bitolando — design tokens + estilos.
+   Padrão LIGHT. Dark via data-theme="dark". Âmbar como acento.
+   Container queries para tablet (<1024) e mobile (<768). */
+
+.bito {
+  /* ─── PALETA LIGHT (default) ────────────────────────── */
+  --bg: #FAFAF8;
+  --surface: #F0EEE9;
+  --surface-2: #E8E5DF;
+  --border: #D4D0C8;
+  --border-soft: #DDD9D1;
+  --hover: #EAE7E1;
+  --fg: #1A1A18;
+  --fg-soft: #5A5855;
+  --fg-fade: #8A8785;
+
+  --accent-hue: 65;
+  --accent: oklch(0.52 0.17 var(--accent-hue));
+  --accent-hover: oklch(0.44 0.16 var(--accent-hue));
+  --accent-dim: oklch(0.52 0.17 var(--accent-hue) / 0.10);
+  --accent-line: oklch(0.52 0.17 var(--accent-hue) / 0.35);
+
+  --warn: oklch(0.55 0.18 30);
+  --warn-dim: oklch(0.55 0.18 30 / 0.12);
+
+  --syn-kw: oklch(0.52 0.16 var(--accent-hue));
+  --syn-str: oklch(0.48 0.12 140);
+  --syn-com: var(--fg-soft);
+  --syn-fn: oklch(0.48 0.11 220);
+  --syn-num: oklch(0.50 0.14 30);
+
+  /* ─── TIPOGRAFIA ────────────────────────────────────── */
+  --body-size: 18px;
+  --body-lh: 1.85;
+  --body-font: 'Inter', system-ui, -apple-system, sans-serif;
+  --mono-font: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* escala (xs..4xl) */
+  --t-xs: 12px;
+  --t-sm: 14px;
+  --t-base: 18px;
+  --t-lg: 22px;
+  --t-xl: 28px;
+  --t-2xl: 36px;
+  --t-3xl: 48px;
+  --t-4xl: 64px;
+
+  /* spacing (4px base) */
+  --s1: 4px;  --s2: 8px;   --s3: 12px;  --s4: 16px;
+  --s6: 24px; --s8: 32px;  --s10: 40px; --s12: 48px;
+  --s16: 64px; --s20: 80px; --s24: 96px; --s32: 128px;
+
+  --measure: 70ch;
+  --col-px: 700px;
+  --gutter: 56px;
+  --container: 1040px;
+
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--body-font);
+  font-size: var(--body-size);
+  line-height: var(--body-lh);
+  font-feature-settings: 'ss01', 'cv11';
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  width: 100%;
+  min-height: 100vh;
+  container-type: inline-size;
+}
+
+.bito * { box-sizing: border-box; }
+.bito a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: color 150ms ease, filter 150ms ease;
+}
+.bito a:hover { text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; filter: brightness(1.15); }
+.bito a:active { filter: brightness(0.85); }
+
+/* ═══════════════════════════════════════════════════════
+   HEADER
+   ═════════════════════════════════════════════════════ */
+.bito-header {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 28px var(--gutter) 22px;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border);
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(250, 250, 248, 0.90);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+.bito-logo {
+  font-family: var(--body-font);
+  font-weight: 700;
+  font-size: 19px;
+  color: var(--fg);
+  letter-spacing: -0.02em;
+  line-height: 1;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  cursor: pointer;
+}
+.bito-logo::after {
+  content: '';
+  width: 20px;
+  height: 2px;
+  background: var(--accent);
+  border-radius: 1px;
+  transition: width 220ms cubic-bezier(.2,.7,.3,1);
+}
+.bito-logo:hover::after { width: 100%; }
+.bito-logo .scope {
+  color: var(--fg-soft);
+  font-weight: 400;
+  margin-left: 6px;
+  font-size: 16px;
+}
+.bito-logo .scope::before { content: '· '; color: var(--fg-fade); }
+
+.bito-meta-nav {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  font-family: var(--body-font);
+  font-size: var(--t-xs);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fg-soft);
+}
+.bito-meta-nav a, .bito-meta-nav button {
+  color: var(--fg-soft);
+  text-decoration: none;
+  padding: 8px 10px;
+  margin: -8px 0;
+  border-radius: 4px;
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 150ms ease;
+}
+.bito-meta-nav a:hover, .bito-meta-nav button:hover { color: var(--fg); text-decoration: none; }
+.bito-meta-nav a.active { color: var(--accent); }
+.bito-meta-nav .sep { color: var(--fg-fade); padding: 0 4px; }
+
+/* ═══════════════════════════════════════════════════════
+   PAGE SHELL
+   ═════════════════════════════════════════════════════ */
+.bito-main {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 var(--gutter) var(--s20);
+}
+
+/* ═══════════════════════════════════════════════════════
+   HOME · POST EM DESTAQUE
+   ═════════════════════════════════════════════════════ */
+.bito-featured {
+  padding: var(--s24) 0 var(--s20);
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  text-decoration: none;
+  display: block;
+  color: inherit;
+}
+/* Cancela o a:hover global — featured tem hover próprio controlado */
+.bito-featured:hover {
+  text-decoration: none;
+  filter: none;
+}
+.bito-featured-head .cat,
+.bito-featured-head .date {
+  text-decoration: none;
+}
+.bito-featured-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: var(--s8);
+  font-size: var(--t-xs);
+  font-family: var(--body-font);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fg-soft);
+  gap: var(--s4);
+}
+.bito-featured-head .cat { color: var(--accent); }
+.bito-featured-head .date { color: var(--fg-soft); font-weight: 500; }
+.bito-featured-title {
+  font-family: var(--body-font);
+  font-size: var(--t-4xl);
+  font-weight: 700;
+  letter-spacing: -0.024em;
+  line-height: 1.05;
+  color: var(--fg);
+  margin: 0 0 var(--s6) 0;
+  max-width: 18ch;
+  text-wrap: balance;
+  transition: filter 150ms ease;
+}
+.bito-featured:hover .bito-featured-title { filter: brightness(1.10); }
+.bito-featured-preview {
+  font-size: var(--t-base);
+  color: var(--fg-soft);
+  margin: 0 0 var(--s6) 0;
+  max-width: 64ch;
+  line-height: 1.55;
+  text-wrap: pretty;
+}
+.bito-featured-cta {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  color: var(--accent);
+  font-size: var(--t-sm);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  padding: 10px 14px;
+  margin: -10px -14px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: filter 150ms ease, background 150ms ease;
+}
+.bito-featured-cta .arrow { transition: transform 200ms ease; display: inline-block; }
+.bito-featured:hover .bito-featured-cta { background: var(--accent-dim); }
+.bito-featured:hover .bito-featured-cta .arrow { transform: translateX(3px); }
+
+/* ═══════════════════════════════════════════════════════
+   ARQUIVO
+   ═════════════════════════════════════════════════════ */
+.bito-archive { padding-top: var(--s16); }
+.bito-archive-label {
+  display: flex;
+  align-items: center;
+  gap: var(--s4);
+  font-size: var(--t-xs);
+  font-family: var(--body-font);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--fg-soft);
+  margin-bottom: var(--s10);
+  justify-content: flex-end;
+}
+.bito-archive-label::before {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.bito-archive-year { margin-bottom: var(--s12); }
+.bito-archive-year:last-child { margin-bottom: 0; }
+.bito-archive-year-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding-bottom: var(--s3);
+  margin-bottom: var(--s2);
+  border-bottom: 1px solid var(--border-soft);
+}
+.bito-archive-year-head .num {
+  font-family: var(--body-font);
+  font-size: var(--t-base);
+  font-weight: 600;
+  color: var(--fg);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}
+.bito-archive-year-head .count {
+  font-family: var(--body-font);
+  font-size: var(--t-xs);
+  color: var(--fg-soft);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+}
+
+.bito-archive-list { list-style: none; padding: 0; margin: 0; }
+.bito-archive-item {
+  display: grid;
+  grid-template-columns: 56px 1fr 130px 84px 64px;
+  gap: 24px;
+  align-items: baseline;
+  padding: 14px 0;
+  cursor: pointer;
+  border-bottom: 1px solid var(--border-soft);
+  transition: padding-left 200ms cubic-bezier(.2,.7,.3,1);
+}
+.bito-archive-item:last-child { border-bottom: none; }
+.bito-archive-item .num {
+  font-family: var(--mono-font);
+  font-size: var(--t-sm);
+  color: var(--fg-fade);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+}
+.bito-archive-item .num.hidden { visibility: hidden; }
+.bito-archive-item .title {
+  font-size: var(--t-base);
+  font-weight: 400;
+  color: var(--fg);
+  line-height: 1.4;
+  letter-spacing: -0.012em;
+  transition: color 150ms ease;
+  text-wrap: pretty;
+  min-width: 0;
+}
+.bito-archive-item .cat {
+  font-family: var(--body-font);
+  font-size: 11px;
+  color: var(--fg-soft);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.bito-archive-item .date {
+  font-family: var(--mono-font);
+  font-size: 13px;
+  color: var(--fg-soft);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+  text-align: right;
+  white-space: nowrap;
+}
+.bito-archive-item .read {
+  font-family: var(--mono-font);
+  font-size: 13px;
+  color: var(--fg-fade);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  white-space: nowrap;
+}
+.bito-archive-item:hover { padding-left: 8px; }
+.bito-archive-item:hover .title { color: var(--accent); }
+.bito-archive-item:hover .num { color: var(--accent); }
+
+/* paginar / mais entradas */
+.bito-archive-more {
+  margin-top: var(--s10);
+  text-align: center;
+  font-family: var(--body-font);
+  font-size: var(--t-xs);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.bito-archive-more a { color: var(--fg-soft); padding: 12px 18px; }
+.bito-archive-more a:hover { color: var(--accent); }
+
+/* ═══════════════════════════════════════════════════════
+   POST INDIVIDUAL
+   ═════════════════════════════════════════════════════ */
+.bito-article {
+  max-width: var(--col-px);
+  margin: 0 auto;
+  padding: var(--s16) var(--gutter) 0;
+}
+.bito-postback {
+  display: inline-block;
+  font-family: var(--body-font);
+  font-size: var(--t-xs);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fg-soft);
+  padding: 8px 10px;
+  margin: 0 -10px var(--s12);
+  cursor: pointer;
+  transition: color 150ms ease;
+}
+.bito-postback:hover { color: var(--accent); }
+.bito-postback .arrow { display: inline-block; transition: transform 200ms ease; margin-right: 4px; }
+.bito-postback:hover .arrow { transform: translateX(-3px); }
+
+.bito-postcat {
+  display: inline-flex;
+  font-family: var(--body-font);
+  font-size: var(--t-xs);
+  font-weight: 600;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: var(--s6);
+  cursor: pointer;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--accent-line);
+  transition: filter 150ms ease;
+}
+.bito-postcat:hover { filter: brightness(1.15); }
+
+.bito-article h1 {
+  font-family: var(--body-font);
+  font-size: var(--t-3xl);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.024em;
+  margin: 0 0 var(--s2);
+  color: var(--fg);
+  text-wrap: balance;
+  max-width: 22ch;
+}
+
+.bito-postmeta {
+  font-family: var(--mono-font);
+  font-size: var(--t-sm);
+  color: var(--fg-soft);
+  letter-spacing: 0.02em;
+  font-variant-numeric: tabular-nums;
+  margin: 0 0 var(--s6);
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+  flex-wrap: wrap;
+}
+.bito-postmeta .sep { color: var(--fg-fade); }
+
+.bito-article hr.meta-rule {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 0 0 var(--s10);
+}
+
+.bito-article p {
+  margin: 0 0 var(--s6);
+  max-width: var(--measure);
+  color: var(--fg);
+  text-wrap: pretty;
+  font-size: var(--t-base);
+  line-height: var(--body-lh);
+}
+.bito-article p .soft { color: var(--fg-soft); }
+.bito-article strong { font-weight: 600; color: var(--fg); }
+.bito-article em { font-style: italic; }
+
+/* lead paragraph (primeiro p) */
+.bito-article > p:first-of-type {
+  font-size: var(--t-lg);
+  line-height: 1.5;
+  color: var(--fg);
+  margin-bottom: var(--s8);
+  letter-spacing: -0.008em;
+}
+
+.bito-article h2 {
+  font-size: var(--t-2xl);
+  font-weight: 600;
+  margin: var(--s16) 0 var(--s4);
+  line-height: 1.15;
+  letter-spacing: -0.020em;
+  color: var(--fg);
+}
+.bito-article h3 {
+  font-size: var(--t-xl);
+  font-weight: 500;
+  margin: var(--s10) 0 var(--s3);
+  line-height: 1.2;
+  letter-spacing: -0.014em;
+  color: var(--fg);
+}
+
+.bito-article ul, .bito-article ol {
+  margin: 0 0 var(--s6) 24px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: var(--measure);
+}
+.bito-article ul li::marker { color: var(--fg-fade); }
+.bito-article ol li::marker { color: var(--fg-soft); font-variant-numeric: tabular-nums; }
+
+.bito-article blockquote {
+  border-left: 3px solid var(--accent);
+  padding: 4px 0 4px 20px;
+  margin: var(--s8) 0;
+  font-style: italic;
+  color: var(--fg-soft);
+  max-width: 64ch;
+  font-size: var(--t-base);
+  line-height: 1.55;
+}
+.bito-article hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: var(--s12) 0;
+}
+
+.bito-article code:not(pre code) {
+  font-family: var(--mono-font);
+  font-size: 15px;
+  background: var(--surface);
+  color: var(--fg);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-feature-settings: 'calt' 0;
+}
+
+.bito-code {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  margin: var(--s8) 0;
+  font-family: var(--mono-font);
+  font-size: 14px;
+  line-height: 1.7;
+  overflow: hidden;
+  position: relative;
+}
+.bito-code:hover .bito-code-copy { opacity: 1; }
+.bito-code-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  border-bottom: 1px solid var(--border);
+  font-size: 11px;
+  color: var(--fg-fade);
+  text-transform: uppercase;
+  letter-spacing: 0.10em;
+  font-family: var(--body-font);
+  font-weight: 600;
+}
+.bito-code-copy {
+  background: none;
+  border: none;
+  color: var(--fg-soft);
+  font-family: var(--body-font);
+  font-weight: 500;
+  font-size: 11px;
+  cursor: pointer;
+  padding: 4px 10px;
+  margin: -4px -10px;
+  border-radius: 4px;
+  transition: color 150ms ease, opacity 150ms ease;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0;
+}
+.bito-code-copy:hover { color: var(--accent); }
+.bito-code pre { margin: 0; padding: 20px 24px; overflow-x: auto; color: var(--fg); }
+.bito-code .kw  { color: var(--syn-kw); }
+.bito-code .str { color: var(--syn-str); }
+.bito-code .com { color: var(--syn-com); font-style: italic; }
+.bito-code .fn  { color: var(--syn-fn); }
+.bito-code .num { color: var(--syn-num); }
+
+/* tabela */
+.bito-article table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: var(--s8) 0;
+  font-variant-numeric: tabular-nums;
+  font-size: 16px;
+}
+.bito-article th {
+  text-align: left;
+  font-weight: 600;
+  color: var(--fg-soft);
+  border-bottom: 1px solid var(--border);
+  padding: 10px 14px;
+  font-size: var(--t-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-family: var(--body-font);
+}
+.bito-article td { padding: 10px 14px; border-bottom: 1px solid var(--surface); }
+.bito-article td:last-child, .bito-article th:last-child { text-align: right; }
+.bito-article tr:hover td { background: var(--surface); }
+
+.bito-video {
+  margin: var(--s10) 0;
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  aspect-ratio: 16 / 9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  color: var(--fg-soft);
+}
+.bito-video::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: repeating-linear-gradient(45deg,
+    transparent, transparent 12px,
+    rgba(255,255,255,0.015) 12px, rgba(255,255,255,0.015) 24px);
+}
+.bito-video span {
+  position: relative;
+  font-family: var(--mono-font);
+  font-size: 13px;
+  letter-spacing: 0.04em;
+}
+.bito-video span::before { content: '▶ '; color: var(--accent); margin-right: 2px; }
+
+/* navegação prev/next */
+.bito-postfooter {
+  margin-top: var(--s16);
+  padding-top: var(--s10);
+  border-top: 1px solid var(--border);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s6);
+  max-width: var(--measure);
+}
+.bito-postfooter .next-label {
+  font-family: var(--body-font);
+  font-size: var(--t-xs);
+  color: var(--fg-soft);
+  text-transform: uppercase;
+  letter-spacing: 0.10em;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+.bito-postfooter .next-label .arrow { color: var(--accent); }
+.bito-postfooter .next-title {
+  font-size: var(--t-base);
+  color: var(--fg);
+  font-weight: 500;
+  line-height: 1.35;
+  cursor: pointer;
+  transition: color 150ms ease;
+  letter-spacing: -0.012em;
+}
+.bito-postfooter .next-title:hover { color: var(--accent); }
+.bito-postfooter .right { text-align: right; }
+
+/* ═══════════════════════════════════════════════════════
+   CATEGORIA
+   ═════════════════════════════════════════════════════ */
+.bito-cat-hero {
+  padding: var(--s20) 0 var(--s10);
+  border-bottom: 1px solid var(--border);
+  margin-bottom: var(--s8);
+}
+.bito-cat-path {
+  font-family: var(--body-font);
+  font-size: var(--t-base);
+  font-weight: 600;
+  color: var(--accent);
+  margin-bottom: var(--s6);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.bito-cat-path .slash { color: var(--fg-fade); margin-right: 6px; font-weight: 400; }
+.bito-cat-desc {
+  font-size: var(--t-lg);
+  color: var(--fg-soft);
+  max-width: 60ch;
+  line-height: 1.45;
+  margin: 0;
+  text-wrap: pretty;
+  letter-spacing: -0.006em;
+}
+.bito-cat-meta {
+  margin-top: var(--s6);
+  font-family: var(--mono-font);
+  font-size: 13px;
+  color: var(--fg-fade);
+  letter-spacing: 0.04em;
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+/* navegação entre categorias (text-strip) */
+.bito-cat-nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--s3);
+  padding: var(--s6) 0 var(--s10);
+  font-family: var(--body-font);
+  font-size: var(--t-xs);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.bito-cat-nav a {
+  color: var(--fg-soft);
+  cursor: pointer;
+  padding: 8px 0;
+  margin: -8px 0;
+  transition: color 150ms ease;
+}
+.bito-cat-nav a:hover { color: var(--fg); text-decoration: none; }
+.bito-cat-nav a.active { color: var(--accent); font-weight: 600; }
+.bito-cat-nav .sep { color: var(--fg-fade); padding: 0 4px; }
+
+/* ═══════════════════════════════════════════════════════
+   FOOTER
+   ═════════════════════════════════════════════════════ */
+.bito-footer {
+  max-width: var(--container);
+  margin: var(--s24) auto 0;
+  padding: var(--s8) var(--gutter) var(--s10);
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-family: var(--body-font);
+  font-size: var(--t-xs);
+  font-weight: 500;
+  color: var(--fg-soft);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  gap: var(--s8);
+}
+.bito-footer .links { display: flex; gap: var(--s6); }
+.bito-footer a { color: var(--fg-soft); padding: 6px 0; margin: -6px 0; }
+.bito-footer a:hover { color: var(--accent); text-decoration: none; }
+.bito-footer .sig { color: var(--fg-soft); }
+
+.bito ::selection { background: var(--accent-dim); color: var(--fg); }
+
+/* ═══════════════════════════════════════════════════════
+   ADMIN
+   ═════════════════════════════════════════════════════ */
+
+.bito-admin-login {
+  min-height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--s16) var(--gutter);
+}
+.bito-admin-login-card { width: 100%; max-width: 360px; }
+.bito-admin-login-mark {
+  font-family: var(--body-font);
+  font-weight: 700;
+  font-size: 24px;
+  color: var(--fg);
+  letter-spacing: -0.02em;
+  margin-bottom: var(--s2);
+  display: inline-flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.bito-admin-login-mark::after {
+  content: '';
+  width: 22px; height: 2px;
+  background: var(--accent);
+  border-radius: 1px;
+}
+.bito-admin-login-mark .scope { color: var(--fg-soft); font-weight: 400; font-size: 17px; margin-left: 6px; }
+.bito-admin-login-mark .scope::before { content: '· '; color: var(--fg-fade); }
+.bito-admin-login-sub {
+  font-family: var(--body-font);
+  font-size: var(--t-xs);
+  color: var(--fg-fade);
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  margin-bottom: var(--s12);
+  font-weight: 500;
+}
+.bito-admin-login form { display: flex; flex-direction: column; gap: var(--s6); }
+
+/* form primitives */
+.bito-field { display: flex; flex-direction: column; gap: var(--s2); }
+.bito-field label {
+  font-family: var(--body-font);
+  font-size: var(--t-xs);
+  color: var(--fg-soft);
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.bito-field .hint {
+  font-family: var(--mono-font);
+  font-size: 11px;
+  color: var(--fg-fade);
+  letter-spacing: 0.02em;
+  margin-top: -2px;
+}
+.bito-input, .bito-textarea, .bito-select {
+  font-family: var(--body-font);
+  font-size: 16px;
+  color: var(--fg);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 12px 14px;
+  outline: none;
+  width: 100%;
+  transition: border-color 150ms ease, background 150ms ease, box-shadow 150ms ease;
+  letter-spacing: -0.005em;
+}
+.bito-input::placeholder, .bito-textarea::placeholder { color: var(--fg-fade); }
+.bito-input:focus, .bito-textarea:focus, .bito-select:focus {
+  border-color: var(--accent-line);
+  background: var(--surface-2);
+  box-shadow: 0 0 0 4px var(--accent-dim);
+}
+.bito-textarea { resize: vertical; line-height: 1.6; min-height: 240px; font-family: var(--body-font); }
+.bito-textarea.mono { font-family: var(--mono-font); font-size: 14px; }
+.bito-select {
+  appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path fill='%23A0A0A0' d='M0 0h10L5 6z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 34px;
+}
+
+.bito-btn {
+  font-family: var(--body-font);
+  font-size: var(--t-xs);
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  font-weight: 600;
+  padding: 12px 18px;
+  border-radius: 6px;
+  cursor: pointer;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--fg);
+  transition: all 150ms ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.bito-btn:hover { border-color: var(--fg-soft); background: var(--surface-2); }
+.bito-btn .arrow { transition: transform 200ms ease; }
+.bito-btn:hover .arrow { transform: translateX(2px); }
+.bito-btn.primary {
+  background: var(--fg);
+  color: var(--bg);
+  border-color: var(--fg);
+}
+.bito-btn.primary:hover { background: var(--accent); border-color: var(--accent); color: #000; }
+.bito-btn.accent {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+.bito-btn.accent:hover { background: var(--accent-hover); border-color: var(--accent-hover); }
+.bito-btn.ghost { background: transparent; }
+.bito-btn.ghost:hover { background: var(--surface); }
+.bito-btn.danger { color: var(--warn); border-color: var(--warn-dim); background: transparent; }
+.bito-btn.danger:hover { background: var(--warn-dim); border-color: var(--warn); }
+
+.bito-admin-main {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: var(--s10) var(--gutter) var(--s20);
+}
+.bito-admin-bread {
+  font-family: var(--body-font);
+  font-size: var(--t-xs);
+  color: var(--fg-soft);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 500;
+  margin-bottom: var(--s6);
+  display: flex;
+  gap: var(--s3);
+  align-items: center;
+}
+.bito-admin-bread a { color: var(--fg-soft); padding: 4px 0; margin: -4px 0; }
+.bito-admin-bread a:hover { color: var(--accent); text-decoration: none; }
+.bito-admin-bread .sep { color: var(--fg-fade); }
+.bito-admin-bread .here { color: var(--fg); font-weight: 600; }
+
+.bito-admin-pagehead {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: var(--s10);
+  gap: var(--s6);
+  flex-wrap: wrap;
+}
+.bito-admin-pagehead h1 {
+  font-family: var(--body-font);
+  font-size: var(--t-3xl);
+  font-weight: 700;
+  letter-spacing: -0.024em;
+  color: var(--fg);
+  margin: 0;
+  line-height: 1;
+}
+.bito-admin-pagehead .meta {
+  font-family: var(--mono-font);
+  font-size: var(--t-xs);
+  color: var(--fg-soft);
+  letter-spacing: 0.04em;
+}
+.bito-admin-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+
+.bito-admin-table {
+  border-collapse: collapse;
+  width: 100%;
+  font-variant-numeric: tabular-nums;
+}
+.bito-admin-table th {
+  text-align: left;
+  font-family: var(--body-font);
+  font-weight: 600;
+  color: var(--fg-soft);
+  border-bottom: 1px solid var(--border);
+  padding: 12px 14px;
+  font-size: var(--t-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.10em;
+}
+.bito-admin-table td {
+  padding: 16px 14px;
+  border-bottom: 1px solid var(--surface);
+  vertical-align: middle;
+  font-size: 15px;
+}
+.bito-admin-table td.num {
+  font-family: var(--mono-font);
+  font-size: 13px;
+  color: var(--fg-fade);
+  letter-spacing: 0.04em;
+  width: 64px;
+}
+.bito-admin-table td.title { color: var(--fg); font-weight: 500; letter-spacing: -0.012em; }
+.bito-admin-table td.title.draft { color: var(--fg-soft); font-style: italic; }
+.bito-admin-table td.cat {
+  font-family: var(--body-font);
+  font-size: 11px;
+  color: var(--fg-soft);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+.bito-admin-table td.date {
+  font-family: var(--mono-font);
+  font-size: 13px;
+  color: var(--fg-soft);
+  letter-spacing: 0.02em;
+  text-align: right;
+}
+.bito-admin-table td.actions {
+  font-family: var(--body-font);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-align: right;
+  white-space: nowrap;
+}
+.bito-admin-table td.actions a { color: var(--fg-soft); padding: 6px 8px; margin: -6px -2px; }
+.bito-admin-table td.actions a:hover { color: var(--accent); text-decoration: none; }
+.bito-admin-table td.actions a + a::before { content: '·'; color: var(--fg-fade); margin-right: 8px; }
+.bito-admin-table tr:hover td { background: var(--surface); }
+.bito-admin-table tr.draft td { background: transparent; }
+
+.bito-admin-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--body-font);
+  font-size: 11px;
+  color: var(--fg-soft);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+.bito-admin-status::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+.bito-admin-status.draft::before { background: var(--fg-fade); }
+
+.bito-admin-form {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: var(--s12);
+  align-items: start;
+}
+.bito-admin-form .col-main { display: flex; flex-direction: column; gap: var(--s6); min-width: 0; }
+.bito-admin-form .col-side { display: flex; flex-direction: column; gap: var(--s6); }
+.bito-admin-row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s4); }
+
+.bito-admin-panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s4);
+}
+.bito-admin-panel-label {
+  font-family: var(--body-font);
+  font-size: 11px;
+  color: var(--fg-soft);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.bito-admin-radio {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 14px;
+}
+.bito-admin-radio label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  color: var(--fg);
+}
+.bito-admin-radio .dot {
+  width: 14px; height: 14px;
+  border: 1.5px solid var(--border);
+  border-radius: 50%;
+  position: relative;
+  flex-shrink: 0;
+  transition: border-color 120ms;
+}
+.bito-admin-radio label.active .dot { border-color: var(--accent); }
+.bito-admin-radio label.active .dot::after {
+  content: '';
+  position: absolute; inset: 3px;
+  background: var(--accent);
+  border-radius: 50%;
+}
+.bito-admin-radio .meta {
+  font-family: var(--mono-font);
+  font-size: 11px;
+  color: var(--fg-fade);
+  letter-spacing: 0.02em;
+  margin-left: 24px;
+  margin-top: -4px;
+}
+
+.bito-admin-formfoot {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: var(--s6);
+  margin-top: var(--s4);
+  border-top: 1px solid var(--border);
+  gap: 12px;
+}
+.bito-admin-formfoot .right { display: flex; gap: 10px; }
+
+/* ═══════════════════════════════════════════════════════
+   RESPONSIVO — TABLET (<1024) + MOBILE (<768)
+   ═════════════════════════════════════════════════════ */
+
+/* tablet: 3 colunas no arquivo (num · título · data) */
+@container (max-width: 1023px) {
+  .bito { --gutter: 32px; }
+  .bito-archive-item {
+    grid-template-columns: 48px 1fr 80px;
+    gap: 16px;
+  }
+  .bito-archive-item .cat,
+  .bito-archive-item .read { display: none; }
+  .bito-featured-title { font-size: 52px; max-width: 16ch; }
+}
+
+/* mobile: tudo se desempilha */
+@container (max-width: 767px) {
+  .bito { --gutter: 20px; --body-size: 17px; }
+  .bito-header { padding: 20px var(--gutter) 16px; }
+  .bito-logo { font-size: 17px; }
+  .bito-meta-nav { font-size: 11px; gap: 0; }
+  .bito-meta-nav a, .bito-meta-nav button { padding: 6px 6px; }
+  .bito-meta-nav .sep { padding: 0 2px; }
+  .bito-main { padding: 0 var(--gutter) var(--s12); }
+  .bito-featured { padding: var(--s12) 0 var(--s10); }
+  .bito-featured-title { font-size: 36px; max-width: 100%; }
+  .bito-featured-preview { font-size: 16px; }
+  .bito-archive { padding-top: var(--s10); }
+  .bito-archive-item {
+    grid-template-columns: 1fr auto;
+    gap: 8px;
+    padding: 14px 0;
+  }
+  .bito-archive-item .num,
+  .bito-archive-item .cat,
+  .bito-archive-item .read { display: none; }
+  .bito-archive-item .title { font-size: 16px; }
+  .bito-archive-item .date { font-size: 12px; }
+  .bito-archive-item:hover { padding-left: 0; }
+  .bito-archive-year-head .num { font-size: 16px; }
+  .bito-article {
+    padding: var(--s10) var(--gutter) 0;
+    margin-top: 0;
+  }
+  .bito-article h1 { font-size: 32px; max-width: 100%; }
+  .bito-article > p:first-of-type { font-size: 19px; }
+  .bito-article h2 { font-size: 26px; margin: var(--s10) 0 var(--s3); }
+  .bito-article h3 { font-size: 22px; }
+  .bito-postfooter { grid-template-columns: 1fr; gap: var(--s4); }
+  .bito-postfooter .right { text-align: left; }
+  .bito-cat-hero { padding: var(--s10) 0 var(--s6); }
+  .bito-cat-desc { font-size: 17px; }
+  .bito-cat-nav { gap: 8px; padding: var(--s4) 0 var(--s8); font-size: 11px; }
+  .bito-footer {
+    flex-direction: column;
+    gap: var(--s4);
+    align-items: flex-start;
+    margin-top: var(--s16);
+    padding: var(--s6) var(--gutter) var(--s8);
+  }
+  .bito-admin-main { padding: var(--s6) var(--gutter) var(--s12); }
+  .bito-admin-pagehead h1 { font-size: 28px; }
+  .bito-admin-form { grid-template-columns: 1fr; gap: var(--s8); }
+  .bito-admin-row { grid-template-columns: 1fr; }
+  .bito-admin-table th, .bito-admin-table td { padding: 10px 8px; font-size: 13px; }
+  .bito-admin-table td.cat, .bito-admin-table td.actions { display: none; }
+  .bito-admin-login { padding: var(--s8) var(--gutter); }
+}
+
+/* ═══════════════════════════════════════════════════════
+   FLASH MESSAGES
+   ═════════════════════════════════════════════════════ */
+.bito-flash {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 12px var(--gutter);
+  font-family: var(--body-font);
+  font-size: var(--t-sm);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+.bito-flash.notice { color: var(--accent); }
+.bito-flash.alert  { color: var(--warn); }
+
+/* ═══════════════════════════════════════════════════════
+   TEMA DARK — data-theme="dark" no <html> (opt-in)
+   ═════════════════════════════════════════════════════ */
+[data-theme="dark"] body { background: #080808; }
+
+[data-theme="dark"] .bito {
+  --bg: #080808;
+  --surface: #111111;
+  --surface-2: #161616;
+  --border: #1C1C1C;
+  --border-soft: #141414;
+  --hover: #141414;
+  --fg: #F2F2F2;
+  --fg-soft: #A0A0A0;
+  --fg-fade: #6B6B6B;
+  --accent: oklch(0.78 0.17 var(--accent-hue));
+  --accent-hover: oklch(0.68 0.16 var(--accent-hue));
+  --accent-dim: oklch(0.78 0.17 var(--accent-hue) / 0.14);
+  --accent-line: oklch(0.78 0.17 var(--accent-hue) / 0.40);
+  --syn-kw: oklch(0.78 0.16 var(--accent-hue));
+  --syn-str: oklch(0.74 0.12 140);
+  --syn-fn: oklch(0.78 0.11 220);
+  --syn-num: oklch(0.78 0.14 30);
+  background: var(--bg);
+}
+
+[data-theme="dark"] .bito-header {
+  background: rgba(8, 8, 8, 0.86);
+}
+
+[data-theme="dark"] .bito-code {
+  background: var(--surface);
+}
+
+/* No dark o âmbar é mais claro (0.78) — texto preto tem melhor contraste */
+[data-theme="dark"] .bito-btn.accent { color: #000; }
+[data-theme="dark"] .bito-btn.primary:hover { color: #000; }
+
+/* ─── TOGGLE LIGHT/DARK ───────────────────────────────── */
+.bito-theme-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--fg-soft);
+  font-size: 16px;
+  padding: 6px 8px;
+  margin: -6px -4px;
+  border-radius: 4px;
+  transition: color 150ms ease;
+  line-height: 1;
+}
+.bito-theme-toggle:hover { color: var(--accent); }
+
+/* ═══════════════════════════════════════════════════════
+   PROSE — corpo do post renderizado via markdown
+   ═════════════════════════════════════════════════════ */
+.bito-prose { max-width: var(--measure); }
+.bito-prose p { margin: 0 0 var(--s6); line-height: var(--body-lh); }
+.bito-prose p:first-child { font-size: var(--t-lg); line-height: 1.5; margin-bottom: var(--s8); letter-spacing: -0.008em; }
+.bito-prose h1, .bito-prose h2, .bito-prose h3, .bito-prose h4 { color: var(--fg); font-weight: 700; letter-spacing: -0.02em; }
+.bito-prose h2 { font-size: var(--t-2xl); margin: var(--s16) 0 var(--s4); line-height: 1.15; }
+.bito-prose h3 { font-size: var(--t-xl); font-weight: 600; margin: var(--s10) 0 var(--s3); line-height: 1.2; }
+.bito-prose h4 { font-size: var(--t-base); font-weight: 600; margin: var(--s8) 0 var(--s2); }
+.bito-prose ul, .bito-prose ol { margin: 0 0 var(--s6) var(--s6); padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.bito-prose li::marker { color: var(--fg-soft); }
+.bito-prose blockquote { border-left: 3px solid var(--accent); padding: 4px 0 4px 20px; margin: var(--s8) 0; font-style: italic; color: var(--fg-soft); }
+.bito-prose hr { border: none; border-top: 1px solid var(--border); margin: var(--s12) 0; }
+.bito-prose code { font-family: var(--mono-font); font-size: 15px; background: var(--surface); color: var(--fg); padding: 2px 6px; border-radius: 4px; }
+.bito-prose pre { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 20px 24px; overflow-x: auto; margin: var(--s8) 0; font-family: var(--mono-font); font-size: 14px; line-height: 1.7; }
+.bito-prose pre code { background: none; padding: 0; font-size: inherit; }
+.bito-prose table { border-collapse: collapse; width: 100%; margin: var(--s8) 0; font-size: 16px; }
+.bito-prose th { text-align: left; font-weight: 600; color: var(--fg-soft); border-bottom: 1px solid var(--border); padding: 10px 14px; font-size: var(--t-xs); text-transform: uppercase; letter-spacing: 0.08em; }
+.bito-prose td { padding: 10px 14px; border-bottom: 1px solid var(--surface-2); }
+.bito-prose a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+.bito-prose strong { font-weight: 600; }
+.bito-prose em { font-style: italic; }
+
+/* ─── imagem de capa ──────────────────────────────────── */
+.bito-post-cover {
+  margin: 0 0 var(--s10);
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+.bito-post-cover img { width: 100%; height: auto; display: block; }
+
+/* ─── embed de vídeo (16:9) ──────────────────────────── */
+.bito-video {
+  position: relative;
+  margin: var(--s10) 0;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  aspect-ratio: 16 / 9;
+  background: var(--surface);
+}
+.bito-video iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }

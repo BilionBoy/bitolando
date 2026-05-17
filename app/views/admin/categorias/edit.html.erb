@@ -1,0 +1,16 @@
+<main class="bito-admin-main">
+  <div class="bito-admin-bread">
+    <%= link_to "categorias", admin_categorias_path %>
+    <span class="sep">/</span>
+    <span class="here">editar</span>
+  </div>
+  <div class="bito-admin-pagehead">
+    <h1><%= @categoria.nome %></h1>
+    <div class="bito-admin-actions">
+      <%= link_to "excluir", admin_categoria_path(@categoria),
+          data: { turbo_method: :delete, turbo_confirm: "Excluir?" },
+          class: "bito-btn danger" %>
+    </div>
+  </div>
+  <%= render "form", categoria: @categoria %>
+</main>

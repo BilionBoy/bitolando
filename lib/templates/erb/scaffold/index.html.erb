@@ -1,0 +1,43 @@
+<%# frozen_string_literal: true %>
+<main class="bito-admin-main">
+  <div class="bito-admin-bread">
+    <span class="here"><%%= t("activerecord.models.<%= singular_table_name %>.other") %></span>
+  </div>
+
+  <div class="bito-admin-pagehead">
+    <div>
+      <h1><%%= t("activerecord.models.<%= singular_table_name %>.other") %></h1>
+      <div class="meta" style="margin-top:8px;"><%%= @<%= plural_table_name %>.size %> registros</div>
+    </div>
+    <div class="bito-admin-actions">
+      <%%= link_to "+ novo →", new_<%= singular_table_name %>_path, class: "bito-btn accent" %>
+    </div>
+  </div>
+
+  <table class="bito-admin-table">
+    <thead>
+      <tr>
+        <th>id</th>
+        <%- attributes.each do |attr| -%>
+        <th><%%= t("activerecord.attributes.<%= singular_table_name %>.<%= attr.name %>") %></th>
+        <%- end -%>
+        <th style="text-align:right;">ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%% @<%= plural_table_name %>.each do |<%= singular_table_name %>| %>
+        <tr>
+          <td class="num"><%%= <%= singular_table_name %>.id %></td>
+          <%- attributes.each do |attr| -%>
+          <td><%%= <%= singular_table_name %>.<%= attr.name %> %></td>
+          <%- end -%>
+          <td class="actions">
+            <%%= link_to "editar", edit_<%= singular_table_name %>_path(<%= singular_table_name %>) %>
+            <%%= link_to "excluir", <%= singular_table_name %>_path(<%= singular_table_name %>),
+                data: { turbo_method: :delete, turbo_confirm: "Excluir?" } %>
+          </td>
+        </tr>
+      <%% end %>
+    </tbody>
+  </table>
+</main>

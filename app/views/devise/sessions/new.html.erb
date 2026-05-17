@@ -1,0 +1,31 @@
+<div class="bito-admin-login">
+  <div class="bito-admin-login-card">
+    <div class="bito-admin-login-mark">
+      bitolando<span class="scope">admin</span>
+    </div>
+    <div class="bito-admin-login-sub">acesso restrito</div>
+
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div class="bito-field">
+        <%= f.label :email, "e-mail" %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "bito-input" %>
+      </div>
+
+      <div class="bito-field">
+        <%= f.label :password, "senha" %>
+        <%= f.password_field :password, autocomplete: "current-password", class: "bito-input" %>
+      </div>
+
+      <% if devise_mapping.rememberable? %>
+        <div class="bito-field" style="flex-direction:row;align-items:center;gap:8px;">
+          <%= f.check_box :remember_me %>
+          <%= f.label :remember_me, "lembrar de mim" %>
+        </div>
+      <% end %>
+
+      <div style="display:flex;justify-content:flex-end;margin-top:12px;">
+        <%= f.submit "entrar", class: "bito-btn accent" %>
+      </div>
+    <% end %>
+  </div>
+</div>
