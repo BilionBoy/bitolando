@@ -1222,6 +1222,19 @@
 .bito-prose strong { font-weight: 600; }
 .bito-prose em { font-style: italic; }
 
+/* ─── sobre: ritmo mais compacto ─────────────────────── */
+.bito-about p { margin-bottom: var(--s5); }
+.bito-about > p:first-of-type { margin-bottom: var(--s6); }
+.bito-about h2 { margin: var(--s12) 0 var(--s4); }
+.bito-about ul, .bito-about ol { margin-bottom: var(--s5); gap: 7px; }
+.bito-about blockquote {
+  margin: var(--s8) 0 var(--s7);
+  padding-left: 22px;
+  font-size: var(--t-lg);
+  line-height: 1.45;
+  color: var(--fg);
+}
+
 /* ─── imagem de capa ──────────────────────────────────── */
 .bito-post-cover {
   margin: 0 0 var(--s10);

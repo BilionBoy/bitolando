@@ -4,7 +4,6 @@ class ApplicationController < ActionController::Base
   include LayoutByUser
   include Pagy::Backend
 
-  allow_browser versions: :modern
 
   before_action :set_locale
 
