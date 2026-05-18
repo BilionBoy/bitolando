@@ -11,6 +11,7 @@
       <div class="meta" style="margin-top:8px;"><%= @post.status.nome %></div>
     </div>
     <div class="bito-admin-actions">
+      <%= link_to "biblioteca de imagens →", admin_imagens_path, target: "_blank", class: "bito-btn ghost" %>
       <% if @post.publicado? %>
         <%= link_to "ver no site →", post_path(@post.slug), target: "_blank", class: "bito-btn ghost" %>
       <% end %>

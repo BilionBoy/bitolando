@@ -25,7 +25,7 @@
     <div class="bito-field">
       <%= f.label :imagem, "imagem de capa" %>
       <%= f.file_field :imagem, class: "bito-input", accept: "image/*" %>
-      <% if post.imagem.attached? %>
+      <% if post.persisted? && post.imagem.attached? %>
         <div class="hint" style="display:flex;align-items:center;gap:8px;margin-top:4px;">
           <%= image_tag post.imagem.variant(resize_to_limit: [120, 80]), style: "border-radius:4px;" %>
           <span>imagem atual</span>
@@ -36,8 +36,8 @@
     <div class="bito-field">
       <%= f.label :corpo, "conteúdo · markdown" %>
       <%= f.text_area :corpo, class: "bito-textarea mono", rows: 24,
-          placeholder: "# Título\n\nParágrafo...\n\n## Seção\n\n```ruby\ncodigo\n```" %>
-      <div class="hint">markdown · h1-h6, **negrito**, *itálico*, `código`, blocos de código, tabelas, links</div>
+          placeholder: "# Título principal (H1)\n## Subtítulo (H2)\n### Seção (H3)\n\nParágrafo normal com **negrito**, *itálico*, ~~riscado~~ e `código inline`.\n\n> Citação importante\n\n- Item de lista\n- Outro item\n  - Subitem\n\n1. Passo um\n2. Passo dois\n\n[Link para referência](https://exemplo.com)\n\n![Legenda da imagem](https://exemplo.com/imagem.jpg)\n\nVídeo (YouTube): https://www.youtube.com/watch?v=SEU_VIDEO_ID\n\n| Coluna A | Coluna B |\n| --- | --- |\n| Valor 1 | Valor 2 |\n\n```ruby\n# Bloco de código\nputs \"Olá, Bitolando\"\n```" %>
+      <div class="hint">markdown completo · h1-h6, negrito, itálico, riscado, citação, listas, links, imagem `![alt](url)`, vídeo (cole a URL do YouTube), tabelas e blocos de código</div>
     </div>
   </div>
 

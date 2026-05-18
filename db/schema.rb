@@ -11,6 +11,9 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.2].define(version: 2026_05_17_230000) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -62,8 +65,8 @@ ActiveRecord::Schema[7.2].define(version: 2026_05_17_230000) do
     t.text "corpo"
     t.integer "tempo_leitura_min", default: 0, null: false
     t.datetime "publicado_em"
-    t.integer "categoria_id", null: false
-    t.integer "status_id", null: false
+    t.bigint "categoria_id", null: false
+    t.bigint "status_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "video_url"

@@ -10,6 +10,9 @@
       <h1>nova entrada</h1>
       <div class="meta" style="margin-top:8px;">rascunho</div>
     </div>
+    <div class="bito-admin-actions">
+      <%= link_to "biblioteca de imagens →", admin_imagens_path, target: "_blank", class: "bito-btn ghost" %>
+    </div>
   </div>
 
   <%= render "form", post: @post %>

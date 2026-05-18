@@ -11,7 +11,7 @@
   </div>
 
   <%# Upload form %>
-  <%= form_with model: [:admin, Imagem.new], multipart: true, class: "bito-admin-form", style: "margin-bottom:var(--s10);" do |f| %>
+  <%= form_with scope: :imagem, url: admin_imagens_path, multipart: true, class: "bito-admin-form", style: "margin-bottom:var(--s10);" do |f| %>
     <div class="col-main">
       <div class="bito-admin-row">
         <div class="bito-field">

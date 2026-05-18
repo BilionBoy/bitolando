@@ -2,7 +2,7 @@ source "https://rubygems.org"
 
 gem "rails", "~> 7.2.3"
 gem "sprockets-rails"
-gem "sqlite3", ">= 1.4"
+gem "pg", "~> 1.5"
 gem "puma", ">= 5.0"
 gem "importmap-rails"
 gem "turbo-rails"
