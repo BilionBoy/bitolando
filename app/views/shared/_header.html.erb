@@ -10,8 +10,8 @@
     <%= link_to "blog", root_path, class: (active_nav == :blog ? "active" : nil) %>
     <span class="sep">·</span>
     <%= link_to "sobre", sobre_path, class: (active_nav == :sobre ? "active" : nil) %>
-    <span class="sep">·</span>
-    <%= link_to "rss", rss_feed_path(format: :xml) %>
+    <span class="sep rss-only">·</span>
+    <%= link_to "rss", rss_feed_path(format: :xml), class: "rss-only" %>
     <span class="sep">·</span>
     <button class="bito-theme-toggle" type="button" data-bito-theme-toggle onclick="bitoToggleTheme()" title="usar tema escuro" aria-label="alternar tema claro/escuro" aria-pressed="false">◐</button>
     <% if usuario_signed_in? %>

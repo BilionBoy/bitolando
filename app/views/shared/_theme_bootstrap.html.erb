@@ -5,7 +5,11 @@
 
     try {
       var stored = localStorage.getItem(key);
-      if (stored === 'light' || stored === 'dark') theme = stored;
+      if (stored === 'light' || stored === 'dark') {
+        theme = stored;
+      } else {
+        localStorage.setItem(key, 'dark');
+      }
     } catch (_error) {}
 
     document.documentElement.setAttribute('data-theme', theme);

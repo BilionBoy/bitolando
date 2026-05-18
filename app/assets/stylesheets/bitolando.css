@@ -1103,6 +1103,7 @@
   .bito-meta-nav { font-size: 11px; gap: 0; }
   .bito-meta-nav a, .bito-meta-nav button { padding: 6px 6px; }
   .bito-meta-nav .sep { padding: 0 2px; }
+  .bito-meta-nav .rss-only { display: none; }
   .bito-main { padding: 0 var(--gutter) var(--s12); }
   .bito-featured { padding: var(--s12) 0 var(--s10); }
   .bito-featured-title { font-size: 36px; max-width: 100%; }
