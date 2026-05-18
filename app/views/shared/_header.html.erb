@@ -1,7 +1,10 @@
 <header class="bito-header">
   <%= link_to root_path, class: "bito-logo", "aria-label": "bitolando" do %>
-    <img class="bito-logo-light" src="/layout/assets/img/bitolando-logo-transparent-trimmed.png" alt="bitolando" height="32">
-    <img class="bito-logo-dark"  src="/layout/assets/img/bitolando-logo.png"                    alt="bitolando" height="32">
+    <span class="bito-logo-mark" aria-hidden="true">
+      <img class="bito-logo-img bito-logo-img-light" src="/layout/assets/img/bitolando-symbol-light.png" alt="" width="36" height="36">
+      <img class="bito-logo-img bito-logo-img-dark"  src="/layout/assets/img/bitolando-symbol-dark.png"  alt="" width="36" height="36">
+    </span>
+    <span class="bito-logo-text">bitolando</span>
   <% end %>
   <nav class="bito-meta-nav">
     <%= link_to "blog", root_path, class: (active_nav == :blog ? "active" : nil) %>

@@ -85,7 +85,7 @@
   margin: 0 auto;
   padding: 28px var(--gutter) 22px;
   display: flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
   border-bottom: 1px solid var(--border);
   position: sticky; top: 0; z-index: 50;
@@ -1236,28 +1236,67 @@
 }
 .bito-video iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
 
-/* ─── LOGO IMAGEM — troca por tema ───────────────────── */
-/* Logo imagem — sobrescreve o flex-column do texto original */
+/* ─── LOGO OFICIAL — símbolo por tema + wordmark textual ─── */
+/*
+   A marca oficial completa funciona como arte, mas no header ela fica pequena
+   demais. Aqui o header usa o símbolo como ícone e renderiza o nome em texto,
+   preservando legibilidade e evitando o bug de duas imagens aparecendo juntas.
+*/
 .bito-logo {
   display: inline-flex;
   flex-direction: row;
   align-items: center;
+  gap: 10px;
+  min-height: 40px;
+  color: var(--accent);
   text-decoration: none;
 }
 .bito-logo::after { display: none; }
+.bito-logo:hover { text-decoration: none; }
 
-.bito-logo img {
+.bito-logo-mark {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  flex: 0 0 38px;
+}
+
+.bito-logo-img {
   display: block;
-  height: 44px;
-  width: auto;
-  max-width: 220px;
+  width: 38px;
+  height: 38px;
   object-fit: contain;
 }
 
-/* Light (padrão) */
-.bito-logo-dark  { display: none; }
-.bito-logo-light { display: block; }
+.bito-logo-text {
+  display: inline-block;
+  font-family: var(--mono-font);
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+  transform: translateY(1px);
+}
 
-/* Dark */
-[data-theme="dark"] .bito-logo-dark  { display: block; }
-[data-theme="dark"] .bito-logo-light { display: none; }
+.bito-logo-img-dark { display: none; }
+.bito-logo-img-light { display: block; }
+
+[data-theme="dark"] .bito-logo-img-dark { display: block; }
+[data-theme="dark"] .bito-logo-img-light { display: none; }
+
+@container (max-width: 767px) {
+  .bito-logo { gap: 8px; min-height: 34px; }
+  .bito-logo-mark,
+  .bito-logo-img {
+    width: 32px;
+    height: 32px;
+    flex-basis: 32px;
+  }
+  .bito-logo-text {
+    font-size: 15px;
+    letter-spacing: 0.08em;
+  }
+}
