@@ -1,0 +1,16 @@
+<script>
+  (function() {
+    var key = 'bito-theme';
+    var theme = 'light';
+
+    try {
+      var stored = localStorage.getItem(key);
+      if (stored === 'light' || stored === 'dark') theme = stored;
+    } catch (_error) {}
+
+    document.documentElement.setAttribute('data-theme', theme);
+
+    var meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.setAttribute('content', theme === 'dark' ? '#080808' : '#FAFAF8');
+  })();
+</script>

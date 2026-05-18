@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-theme="light">
   <head>
     <title>bitolando · acesso</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -8,13 +8,15 @@
     <link rel="icon" type="image/x-icon"    href="/layout/assets/img/favicon_io/favicon.ico">
     <link rel="icon" type="image/png" sizes="32x32" href="/layout/assets/img/favicon_io/favicon-32x32.png">
     <link rel="apple-touch-icon" href="/layout/assets/img/favicon_io/apple-touch-icon.png">
+    <meta name="theme-color" content="#FAFAF8">
+    <%= render "shared/theme_bootstrap" %>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
-  <body style="margin:0;padding:0;background:#080808;">
+  <body>
     <div class="bito">
       <% if flash[:notice].present? %>
         <div class="bito-flash notice"><%= flash[:notice] %></div>

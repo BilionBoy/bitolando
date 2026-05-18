@@ -11,19 +11,13 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/layout/assets/img/favicon_io/favicon-32x32.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/layout/assets/img/favicon_io/apple-touch-icon.png">
     <link rel="manifest" href="/layout/assets/img/favicon_io/site.webmanifest">
-    <meta name="theme-color" content="#080808">
+    <meta name="theme-color" content="#FAFAF8">
+    <%= render "shared/theme_bootstrap" %>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
-    <script>
-      // Padrão: light. Admin tem data-theme="dark" fixo e não roda este script.
-      (function() {
-        var t = localStorage.getItem('bito-theme') || 'light';
-        document.documentElement.setAttribute('data-theme', t);
-      })();
-    </script>
   </head>
   <body>
     <div class="bito">

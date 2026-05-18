@@ -1178,18 +1178,25 @@
 
 /* ─── TOGGLE LIGHT/DARK ───────────────────────────────── */
 .bito-theme-toggle {
-  background: none;
-  border: none;
+  appearance: none;
+  background: transparent;
+  border: 1px solid transparent;
   cursor: pointer;
   color: var(--fg-soft);
   font-size: 16px;
   padding: 6px 8px;
   margin: -6px -4px;
-  border-radius: 4px;
-  transition: color 150ms ease;
+  border-radius: 6px;
+  transition: color 150ms ease, border-color 150ms ease, background-color 150ms ease;
   line-height: 1;
 }
 .bito-theme-toggle:hover { color: var(--accent); }
+.bito-theme-toggle:focus { outline: none; }
+.bito-theme-toggle:focus-visible {
+  color: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 42%, transparent);
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+}
 
 /* ═══════════════════════════════════════════════════════
    PROSE — corpo do post renderizado via markdown

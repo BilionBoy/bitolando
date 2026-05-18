@@ -13,19 +13,10 @@
     <span class="sep">·</span>
     <%= link_to "rss", rss_feed_path(format: :xml) %>
     <span class="sep">·</span>
-    <button class="bito-theme-toggle" onclick="bitoToggleTheme()" title="alternar tema" aria-label="alternar tema claro/escuro">◐</button>
+    <button class="bito-theme-toggle" type="button" data-bito-theme-toggle onclick="bitoToggleTheme()" title="usar tema escuro" aria-label="alternar tema claro/escuro" aria-pressed="false">◐</button>
     <% if usuario_signed_in? %>
       <span class="sep">·</span>
       <%= link_to "⚙", admin_root_path, title: "admin", style: "font-size:15px;padding:6px 8px;margin:-6px -4px;" %>
     <% end %>
   </nav>
 </header>
-
-<script>
-  function bitoToggleTheme() {
-    var html = document.documentElement;
-    var next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-    html.setAttribute('data-theme', next);
-    localStorage.setItem('bito-theme', next);
-  }
-</script>
