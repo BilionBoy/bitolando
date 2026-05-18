@@ -9,4 +9,12 @@ class PaginasController < ApplicationController
       format.xml { render layout: false }
     end
   end
+
+  def sitemap
+    @posts = Post.publicados.por_data
+    @categorias = Categoria.ordenadas
+    respond_to do |format|
+      format.xml { render layout: false }
+    end
+  end
 end

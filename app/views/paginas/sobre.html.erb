@@ -1,4 +1,19 @@
-<% content_for :title, "sobre · bitolando" %>
+<% content_for :title, "André Dhiogo de Aguiar Muiva · sobre · bitolando" %>
+<% content_for :description, "André Dhiogo de Aguiar Muiva: arquiteto de software, analista de sistemas e fundador do Bitolando." %>
+<% content_for :canonical_url, sobre_url %>
+<% content_for :structured_data do %>
+<%= raw({
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "André Dhiogo de Aguiar Muiva",
+  "url": sobre_url,
+  "sameAs": [
+    root_url
+  ],
+  "jobTitle": "Arquiteto de Software",
+  "description": "Analista de sistemas e construtor do Bitolando."
+}.to_json) %>
+<% end %>
 <%= render "shared/header", active_nav: :sobre %>
 <article class="bito-article">
   <h1>sobre</h1>

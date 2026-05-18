@@ -1,4 +1,19 @@
 <% content_for :title, "bitolando" %>
+<% content_for :description, "Bitolando: blog de engenharia de software, arquitetura, decisões técnicas e execução real por André Dhiogo de Aguiar Muiva." %>
+<% content_for :canonical_url, root_url %>
+<% content_for :structured_data do %>
+<%= raw({
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "bitolando",
+  "url": root_url,
+  "inLanguage": "pt-BR",
+  "author": {
+    "@type": "Person",
+    "name": "André Dhiogo de Aguiar Muiva"
+  }
+}.to_json) %>
+<% end %>
 
 <%= render "shared/header", active_nav: :blog %>
 

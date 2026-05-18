@@ -25,6 +25,7 @@ Rails.application.routes.draw do
 
   get "sobre", to: "paginas#sobre", as: :sobre
   get "rss.xml", to: "paginas#rss", as: :rss_feed, defaults: { format: :xml }
+  get "sitemap.xml", to: "paginas#sitemap", as: :sitemap, defaults: { format: :xml }
 
   # Páginas de erro personalizadas
   match "/404", to: "errors#not_found",             via: :all

@@ -1,4 +1,20 @@
 <% content_for :title, "#{@categoria.nome} · bitolando" %>
+<% content_for :description, (@categoria.descricao.presence || "Posts sobre #{@categoria.nome} no bitolando.") %>
+<% content_for :canonical_url, categoria_url(@categoria.slug) %>
+<% content_for :structured_data do %>
+<%= raw({
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": @categoria.nome,
+  "description": (@categoria.descricao.presence || "Posts sobre #{@categoria.nome} no bitolando."),
+  "url": categoria_url(@categoria.slug),
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "bitolando",
+    "url": root_url
+  }
+}.to_json) %>
+<% end %>
 
 <%= render "shared/header", active_nav: :blog %>
 

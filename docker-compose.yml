@@ -1,0 +1,35 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: bitolando_app
+    restart: always
+    depends_on:
+      - db
+    env_file:
+      - .env.production
+    volumes:
+      - ./storage:/rails/storage
+      - ./log:/rails/log
+      - ./tmp:/rails/tmp
+    networks:
+      - bitolando_net
+
+  db:
+    image: postgres:15
+    container_name: bitolando_db_prod
+    restart: always
+    env_file:
+      - .env.production
+    volumes:
+      - pgdata_bitolando_prod:/var/lib/postgresql/data
+    networks:
+      - bitolando_net
+
+volumes:
+  pgdata_bitolando_prod:
+
+networks:
+  bitolando_net:
+    name: bitolando_net
