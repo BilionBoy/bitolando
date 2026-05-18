@@ -504,11 +504,11 @@
   font-family: var(--mono-font);
   font-size: 14px;
   line-height: 1.7;
-  color: #111;
+  color: var(--fg);
   letter-spacing: 0.01em;
 }
 .bito-dedicatoria .lead {
-  color: #111;
+  color: var(--accent);
   font-family: var(--body-font);
   font-weight: 600;
   letter-spacing: 0.02em;

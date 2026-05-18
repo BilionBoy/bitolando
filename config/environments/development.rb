@@ -55,6 +55,10 @@ Rails.application.configure do
   # Raise an error on page load if there are pending migrations.
   config.active_record.migration_error = :page_load
 
+  # Permite acesso externo ao ambiente dev por domínio.
+  config.hosts << "bitolando.online"
+  config.hosts << "www.bitolando.online"
+
   # Highlight code that triggered database queries in logs.
   config.active_record.verbose_query_logs = true
 

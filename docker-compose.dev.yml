@@ -1,0 +1,40 @@
+services:
+  app_dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: bitolando_app_dev
+    restart: always
+    depends_on:
+      - db_dev
+    env_file:
+      - .env.dev
+    volumes:
+      - .:/app
+      - bundle_cache:/usr/local/bundle
+    ports:
+      - "3010:3000"
+    networks:
+      - bitolando_net
+    command: bash -lc "rm -f tmp/pids/server.pid && bundle exec rails db:prepare && bundle exec rails server -b 0.0.0.0 -p 3000"
+
+  db_dev:
+    image: postgres:15
+    container_name: bitolando_db_dev
+    restart: always
+    env_file:
+      - .env.dev
+    volumes:
+      - pgdata_bitolando_dev:/var/lib/postgresql/data
+    ports:
+      - "5450:5432"
+    networks:
+      - bitolando_net
+
+volumes:
+  pgdata_bitolando_dev:
+  bundle_cache:
+
+networks:
+  bitolando_net:
+    name: bitolando_net
