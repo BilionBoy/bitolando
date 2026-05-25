@@ -15,7 +15,7 @@ gem "bootsnap", require: false
 gem "devise"
 
 # Paginação — mesma versão do Frotas MVC
-gem "pagy", "~> 6.5"
+gem "pagy", "~> 43.5"
 
 # Markdown com syntax highlight
 gem "redcarpet"
