@@ -1,12 +1,12 @@
 <% content_for :title, "#{@post.titulo} · bitolando" %>
-<% content_for :description, @post.corpo.to_s.gsub(/[#*`]/, "").truncate(160) %>
+<% content_for :description, @post.corpo.to_plain_text.truncate(160) %>
 <% content_for :canonical_url, post_url(@post.slug) %>
 <% content_for :structured_data do %>
 <%= raw({
   "@context": "https://schema.org",
   "@type": "BlogPosting",
   "headline": @post.titulo,
-  "description": @post.corpo.to_s.gsub(/[#*`]/, "").truncate(160),
+  "description": @post.corpo.to_plain_text.truncate(160),
   "datePublished": (@post.publicado_em || @post.created_at)&.iso8601,
   "dateModified": @post.updated_at&.iso8601,
   "mainEntityOfPage": post_url(@post.slug),
@@ -67,9 +67,8 @@
     </div>
   <% end %>
 
-  <%# Corpo em markdown %>
   <div class="bito-prose">
-    <%= render_markdown(@post.corpo) %>
+    <%= @post.corpo %>
   </div>
 
   <footer class="bito-postfooter">

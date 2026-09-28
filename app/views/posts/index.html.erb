@@ -25,7 +25,7 @@
         <span class="date"><%= l(@post_destaque.publicado_em, format: :short) if @post_destaque.publicado_em %></span>
       </div>
       <h1 class="bito-featured-title"><%= @post_destaque.titulo %></h1>
-      <p class="bito-featured-preview"><%= @post_destaque.corpo.to_s.split("\n\n").first.to_s.truncate(280) %></p>
+      <p class="bito-featured-preview"><%= @post_destaque.corpo.to_plain_text.truncate(280) %></p>
       <span class="bito-featured-cta">ler<span class="arrow"> →</span></span>
     </section>
   <% end %>

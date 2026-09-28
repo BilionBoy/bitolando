@@ -5,6 +5,7 @@ class Post < ApplicationRecord
   belongs_to :status
 
   has_one_attached :imagem
+  has_rich_text :corpo
 
   validates :titulo, presence: true
   validates :slug, presence: true, uniqueness: true
@@ -15,7 +16,7 @@ class Post < ApplicationRecord
   scope :rascunhos, -> { joins(:status).where(statuses: { nome: "rascunho" }) }
 
   before_validation :gerar_slug, if: -> { slug.blank? && titulo.present? }
-  before_save :calcular_tempo_leitura, if: -> { corpo_changed? }
+  before_save :calcular_tempo_leitura
 
   def publicado? = status&.publicado?
   def rascunho?  = status&.rascunho?
@@ -33,7 +34,7 @@ class Post < ApplicationRecord
   def calcular_tempo_leitura
     return if corpo.blank?
 
-    palavras = corpo.split.size
+    palavras = corpo.to_plain_text.split.size
     self.tempo_leitura_min = [ (palavras / 200.0).ceil, 1 ].max
   end
 end

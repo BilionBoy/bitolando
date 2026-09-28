@@ -1334,3 +1334,33 @@
     letter-spacing: 0.08em;
   }
 }
+
+/* Trix (ActionText) — herda as variáveis do tema em vez do branco padrão */
+.bito trix-toolbar { margin-bottom: 8px; }
+.bito trix-toolbar .trix-button-group {
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+}
+.bito trix-toolbar .trix-button {
+  background: transparent;
+  color: var(--fg-soft);
+  border-color: var(--border);
+}
+.bito trix-toolbar .trix-button.trix-active { color: var(--accent); background: var(--accent-dim); }
+.bito trix-toolbar .trix-button:not(:disabled):hover { color: var(--fg); background: var(--surface-2); }
+.bito trix-editor {
+  font-family: var(--body-font);
+  font-size: 16px;
+  color: var(--fg);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 12px 14px;
+  min-height: 320px;
+}
+.bito trix-editor:focus {
+  border-color: var(--accent-line);
+  background: var(--surface-2);
+  box-shadow: 0 0 0 4px var(--accent-dim);
+}

@@ -17,9 +17,6 @@ gem "devise"
 # Paginação — mesma versão do Frotas MVC
 gem "pagy", "~> 6.5"
 
-# Markdown com syntax highlight
-gem "redcarpet"
-
 # Processamento de imagens (Active Storage variants)
 gem "image_processing", "~> 1.2"
 

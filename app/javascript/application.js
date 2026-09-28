@@ -59,3 +59,6 @@ window.bitoToggleTheme = function bitoToggleTheme() {
 applyTheme()
 document.addEventListener("turbo:load", () => applyTheme())
 document.addEventListener("turbo:render", () => applyTheme())
+
+import "trix"
+import "@rails/actiontext"
