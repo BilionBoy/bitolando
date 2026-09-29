@@ -442,6 +442,9 @@
 .bito-article strong { font-weight: 600; color: var(--fg); }
 .bito-article em { font-style: italic; }
 
+/* lead colado no h1 (sem meta entre eles) precisa de respiro */
+.bito-article > h1 + p { margin-top: var(--s8); }
+
 /* lead paragraph (primeiro p) */
 .bito-article > p:first-of-type {
   font-size: var(--t-lg);
@@ -490,31 +493,110 @@
   line-height: 1.55;
 }
 
-.bito-dedicatoria {
-  max-width: var(--measure);
-  margin: var(--s5) 0 var(--s7);
-  padding: 18px 20px;
-  border: 1px solid var(--border);
-  border-left: 3px solid var(--accent);
-  border-radius: 8px;
-  background: color-mix(in srgb, var(--surface) 80%, transparent);
+/* ═══ SOBRE — ilustração → manifesto → contexto → dedicatória ═══ */
+.bito-sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
 }
-.bito-dedicatoria p {
-  margin: 0 0 10px;
-  font-family: var(--mono-font);
-  font-size: 14px;
-  line-height: 1.7;
+
+/* sobre usa a largura do header/rodapé: texto à esquerda, ilustração à direita */
+.bito-article.bito-sobre { max-width: var(--container); }
+.bito-sobre-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 420px);
+  gap: var(--s12);
+  align-items: center;
+}
+.bito-sobre-figura { margin: 0; }
+.bito-sobre-figura img { display: block; width: 100%; height: auto; }
+.bito-sobre-figura .tema-escuro { display: none; }
+[data-theme="dark"] .bito-sobre-figura .tema-claro { display: none; }
+[data-theme="dark"] .bito-sobre-figura .tema-escuro { display: block; }
+
+.bito-sobre p.bito-sobre-manifesto {
+  font-size: var(--t-xl);
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: -0.018em;
   color: var(--fg);
-  letter-spacing: 0.01em;
+  text-wrap: balance;
+  margin: 0;
 }
-.bito-dedicatoria .lead {
-  color: var(--accent);
+
+/* dedicatória invertida: papel escuro no tema claro, papel quente no tema escuro.
+   mesma largura do hero; por dentro repete o ritmo texto | conteúdo. */
+.bito-dedicatoria {
+  --ded-bg: #1C1B19;
+  --ded-fg: #F5F3EE;
+  --ded-accent: oklch(0.78 0.17 var(--accent-hue));
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+  gap: var(--s12);
+  margin: var(--s24) 0 0;
+  padding: var(--s12);
+  border-radius: 8px;
+  background: var(--ded-bg);
+  color: var(--ded-fg);
+}
+[data-theme="dark"] .bito-dedicatoria {
+  --ded-bg: #ECE8E0;
+  --ded-fg: #1C1B19;
+  --ded-accent: oklch(0.52 0.17 var(--accent-hue));
+}
+.bito-dedicatoria-cabeca { align-self: start; }
+/* rótulo no mesmo estilo do menu e do rodapé */
+.bito-article .bito-dedicatoria h2 {
   font-family: var(--body-font);
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  text-transform: lowercase;
+  font-size: var(--t-xs);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 1;
+  color: var(--ded-accent);
+  margin: 0 0 var(--s4);
 }
-.bito-dedicatoria p:last-child { margin-bottom: 0; }
+.bito-article .bito-dedicatoria .lead {
+  font-size: var(--t-lg);
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  color: var(--ded-fg);
+  text-wrap: balance;
+  margin: 0;
+}
+.bito-article .bito-dedicatoria ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 0;
+  max-width: none;
+}
+.bito-dedicatoria li {
+  padding: var(--s6) 0;
+  border-top: 1px solid color-mix(in srgb, var(--ded-fg) 12%, transparent);
+}
+.bito-dedicatoria li:first-child { padding-top: 0; border-top: 0; }
+.bito-dedicatoria li:last-child { padding-bottom: 0; }
+.bito-dedicatoria li strong {
+  display: block;
+  font-size: var(--t-base);
+  font-weight: 600;
+  color: var(--ded-fg);
+  margin-bottom: var(--s1);
+}
+.bito-article .bito-dedicatoria li p {
+  font-size: 16px;
+  line-height: 1.6;
+  max-width: none;
+  color: color-mix(in srgb, var(--ded-fg) 68%, transparent);
+  margin: 0;
+}
+
 .bito-article hr {
   border: none;
   border-top: 1px solid var(--border);
@@ -735,7 +817,7 @@
   border-top: 1px solid var(--border);
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
+  align-items: center;
   font-family: var(--body-font);
   font-size: var(--t-xs);
   font-weight: 500;
@@ -744,8 +826,24 @@
   text-transform: uppercase;
   gap: var(--s8);
 }
-.bito-footer .links { display: flex; gap: var(--s6); }
-.bito-footer a { color: var(--fg-soft); padding: 6px 0; margin: -6px 0; }
+.bito-footer .links { display: flex; gap: var(--s8); align-items: center; }
+.bito-footer a {
+  color: var(--fg-soft);
+  display: inline-flex;
+  padding: 8px;
+  margin: -8px;
+  line-height: 1;
+  transition: color 150ms ease;
+}
+.bito-footer svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.75;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
 .bito-footer a:hover { color: var(--accent); text-decoration: none; }
 .bito-footer .sig { color: var(--fg-soft); }
 
@@ -1126,6 +1224,10 @@
     margin-top: 0;
   }
   .bito-article h1 { font-size: 32px; max-width: 100%; }
+  .bito-sobre p.bito-sobre-manifesto { font-size: 23px; }
+  .bito-sobre-hero { grid-template-columns: 1fr; gap: var(--s8); }
+  .bito-sobre-figura { max-width: 300px; }
+  .bito-dedicatoria { grid-template-columns: 1fr; gap: var(--s8); padding: var(--s6); margin-top: var(--s16); }
   .bito-article > p:first-of-type { font-size: 19px; }
   .bito-article h2 { font-size: 26px; margin: var(--s10) 0 var(--s3); }
   .bito-article h3 { font-size: 22px; }
@@ -1363,4 +1465,43 @@
   border-color: var(--accent-line);
   background: var(--surface-2);
   box-shadow: 0 0 0 4px var(--accent-dim);
+}
+
+/* ═══════════════════════════════════════════════════════
+   FONT PREVIEW — seletor de fonte do corpo (só admin)
+   ═════════════════════════════════════════════════════ */
+.bito-font-preview {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 50;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+  padding: 6px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: var(--t-xs);
+}
+.bito-font-preview .label {
+  font-family: var(--mono-font);
+  color: var(--fg-soft);
+  padding: 0 6px;
+}
+.bito-font-preview button {
+  appearance: none;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  padding: 4px 8px;
+  color: var(--fg-soft);
+  font-size: 13px;
+  cursor: pointer;
+}
+.bito-font-preview button:hover { color: var(--fg); }
+.bito-font-preview button[aria-pressed="true"] {
+  color: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 42%, transparent);
 }

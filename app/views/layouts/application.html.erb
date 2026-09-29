@@ -44,5 +44,6 @@
       <% end %>
       <%= yield %>
     </div>
+    <%= render "shared/font_preview" if usuario_signed_in? %>
   </body>
 </html>

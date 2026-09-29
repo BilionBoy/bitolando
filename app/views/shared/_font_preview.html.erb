@@ -1,0 +1,19 @@
+<%# Seletor de fonte para testar tipografia no site real (só admin) %>
+<% fontes = {
+  "Inter"          => nil,
+  "Instrument Sans" => "https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&display=swap",
+  "Hanken Grotesk"  => "https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&display=swap",
+  "IBM Plex Sans"   => "https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap"
+} %>
+<div class="bito-font-preview" data-controller="font-preview" data-turbo-permanent id="bito-font-preview">
+  <span class="label">fonte</span>
+  <% fontes.each do |nome, href| %>
+    <button type="button"
+            data-font-preview-target="option"
+            data-action="font-preview#pick"
+            data-family="<%= nome %>"
+            data-href="<%= href %>"
+            style="font-family: '<%= nome %>', system-ui, sans-serif"
+            aria-pressed="false"><%= nome.downcase %></button>
+  <% end %>
+</div>

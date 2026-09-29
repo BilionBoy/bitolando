@@ -1,8 +1,14 @@
 <footer class="bito-footer">
   <div class="sig">dhiogo · caderno público · <%= Date.current.year %></div>
   <div class="links">
-    <a href="https://github.com/dhiogo" target="_blank" rel="noopener">github</a>
-    <%= link_to "rss", rss_feed_path(format: :xml) %>
-    <a href="mailto:dhiogo@bitolando.com">email</a>
+    <a href="https://www.linkedin.com/in/andr%C3%A9-dhiogo-de-aguiar-muiva-96838b260/" target="_blank" rel="noopener" aria-label="linkedin" title="linkedin">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+    </a>
+    <%= link_to rss_feed_path(format: :xml), "aria-label": "rss", title: "rss" do %>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1"/></svg>
+    <% end %>
+    <a href="mailto:dhionuxsistemas@gmail.com" aria-label="email" title="email">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
+    </a>
   </div>
 </footer>

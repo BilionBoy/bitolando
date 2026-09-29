@@ -2,81 +2,62 @@
 <% content_for :description, "André Dhiogo de Aguiar Muiva: arquiteto de software, analista de sistemas e fundador do Bitolando." %>
 <% content_for :canonical_url, sobre_url %>
 <% content_for :structured_data do %>
-<%= raw({
+  <%= raw({
   "@context": "https://schema.org",
   "@type": "Person",
   "name": "André Dhiogo de Aguiar Muiva",
   "url": sobre_url,
   "sameAs": [
-    root_url
+    root_url,
+    "https://www.linkedin.com/in/andr%C3%A9-dhiogo-de-aguiar-muiva-96838b260/"
   ],
   "jobTitle": "Arquiteto de Software",
   "description": "Analista de sistemas e construtor do Bitolando."
 }.to_json) %>
 <% end %>
 <%= render "shared/header", active_nav: :sobre %>
-<article class="bito-article">
-  <h1>sobre</h1>
-  <blockquote>
-    me chamo André Dhiogo De Aguiar Muiva, tenho 21 anos (pelo menos atév essa publicação 17/05/2026).
-  </blockquote>
-  <p>
-    o bitolando é meu registro vivo de decisões, onde compartilho minha visão de
-    arquitetura, gestão, mercado e execução diária.
-  </p>
-  <p>
-    Nasci em 2004, no mesmo ano em que
-    o ruby on rails nasceu. entrei cedo no mundo da programação e construí
-    minha trajetória na prática: de vender software de porta em porta para
-    pequenos negócios até atuar em sistemas com milhares de transações diárias,
-    alta concorrência e operação contínua.
-  </p>
-  <p>
-    essa vivência me moldou como profissional e como construtor. hoje, meu foco
-    está em criar software robusto, com visão de longo prazo, unindo arquitetura,
-    dados, infraestrutura e operação com responsabilidade técnica.
-  </p>
-  <p>
-    para mim, arquitetura é base, direção e continuidade. é o que separa
-    software que atravessa o tempo de software que apenas funciona por
-    enquanto. quando bem definida, cria uma linguagem comum entre todos os
-    atores da construção de um sistema.
-  </p>
-  <h2>o que eu amo construir</h2>
-  <ul>
-    <li>visão que nasce antes do produto: arquitetura e banco de dados primeiro, materialização depois</li>
-    <li>estrutura de dados que conta a verdade do negócio, sem maquiagem</li>
-    <li>sistemas guiados por dados, com consistência, rastreabilidade e leitura de cenário</li>
-    <li>devops como estilo de vida: a infraestrutura é o coração do software, e operação é a capacidade de manter esse coração pulsando com segurança</li>
-    <li>manutenção pensada para o usuário final, não para conforto do desenvolvedor</li>
-    <li>decisões técnicas que sustentam negócio no longo prazo</li>
-  </ul>
-  <h2>cultura que eu defendo</h2>
-  <ul>
-    <li>resolver o problema certo, com simplicidade e profundidade</li>
-    <li>pensar arquitetura como ativo estratégico de negócio</li>
-    <li>manter ritmo de execução alto sem abrir mão de qualidade</li>
-    <li>transformar aprendizado diário em padrão e referência</li>
-  </ul>
-  <h2>dedicatória</h2>
-  <aside class="bito-dedicatoria">
-    <p class="lead">a quem moldou minha visão.</p>
-    <p>
-      a Alexandre Costa Pinto, meu sócio em negócios e mentor na vida. por me
-      ensinar a coisa mais importante de todas: software só vira transformação
-      real quando encontra direção de negócio.
+<article class="bito-article bito-sobre">
+  <h1 class="bito-sr-only">sobre</h1>
+  <div class="bito-sobre-hero">
+    <p class="bito-sobre-manifesto">
+      vendo, projeto, construo, escalo e refaço produtos. o bitolando é onde
+      registro as decisões do caminho, um dia por vez.
     </p>
-    <p>
-      a Fernando Terra Valejo Melo, o homem que me ensinou a programar e, para
-      mim, é o melhor desenvolvedor que já vi. com ele aprendi que um CRUD, nas
-      mãos da pessoa certa, pode valer milhões.
-    </p>
-    <p>
-      e a Fabio Akita, referência nacional de profundidade técnica e
-      pensamento crítico.
-    </p>
+    <figure class="bito-sobre-figura">
+      <img class="tema-claro" src="/layout/assets/img/sobre/dhiogando.webp"
+           alt="ilustração de Dhiogo sentado de pernas cruzadas com um notebook, vestindo moletom do Rails, cercado por janelas de código, gráficos e ideias"
+           width="960" height="960" decoding="async">
+      <img class="tema-escuro" src="/layout/assets/img/sobre/dhiogando-modo-dark.webp"
+           alt="" width="960" height="960" decoding="async">
+    </figure>
+  </div>
+  <aside class="bito-dedicatoria" aria-labelledby="dedicatoria-titulo">
+    <div class="bito-dedicatoria-cabeca">
+      <h2 id="dedicatoria-titulo">dedicatória</h2>
+      <p class="lead">a quem moldou minha visão.</p>
+    </div>
+    <ul>
+      <li>
+        <strong>Alexandre Costa Pinto</strong>
+        <p>
+          meu sócio em negócios e mentor na vida. por me ensinar a coisa mais
+          importante de todas: software só vira transformação real quando
+          encontra direção de negócio.
+        </p>
+      </li>
+      <li>
+        <strong>Fernando Terra Valejo Melo</strong>
+        <p>
+          o homem que me ensinou a programar e, para mim, é o melhor
+          desenvolvedor que já vi. com ele aprendi que um CRUD, nas mãos da
+          pessoa certa, pode valer milhões.
+        </p>
+      </li>
+      <li>
+        <strong>Fabio Akita</strong>
+        <p>referência nacional de profundidade técnica e pensamento crítico.</p>
+      </li>
+    </ul>
   </aside>
-  <hr>
-  <p><strong>o ecossistema frotas é prova de que visão, cultura e engenharia mudam o jogo. o bitolando é onde eu documento essa construção, um dia por vez.</strong></p>
 </article>
 <%= render "shared/footer" %>
