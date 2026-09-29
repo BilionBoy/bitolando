@@ -1,6 +1,7 @@
 <% content_for :title, "#{@post.titulo} · bitolando" %>
 <% content_for :description, @post.corpo.to_plain_text.truncate(160) %>
 <% content_for :canonical_url, post_url(@post.slug) %>
+<% content_for :og_image, url_for(@post.imagem.variant(resize_to_limit: [1200, 630])) if @post.imagem.attached? %>
 <% content_for :structured_data do %>
 <%= raw({
   "@context": "https://schema.org",
@@ -87,6 +88,20 @@
       </div>
     <% end %>
   </footer>
+
+  <div id="disqus_thread"></div>
+  <script>
+    var disqus_config = function () {
+      this.page.url = "<%= post_url(@post.slug) %>";
+      this.page.identifier = "<%= @post.slug %>";
+    };
+    (function() {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://bitolando.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
 </article>
 
 <%= render "shared/footer" %>
