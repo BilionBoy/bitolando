@@ -54,8 +54,11 @@ Rails.application.configure do
   # Skip http-to-https redirect for the default health check endpoint.
   # config.ssl_options = { redirect: { exclude: ->(request) { request.path == "/up" } } }
 
-  # Log to STDOUT by default
-  config.logger = ActiveSupport::Logger.new(STDOUT)
+  # Log pro STDOUT (docker logs -f) e também pro arquivo (tail -f log/production.log)
+  stdout_logger = ActiveSupport::Logger.new(STDOUT)
+  file_logger   = ActiveSupport::Logger.new(Rails.root.join("log", "#{Rails.env}.log"))
+  stdout_logger.extend(ActiveSupport::Logger.broadcast(file_logger))
+  config.logger = stdout_logger
     .tap  { |logger| logger.formatter = ::Logger::Formatter.new }
     .then { |logger| ActiveSupport::TaggedLogging.new(logger) }
 

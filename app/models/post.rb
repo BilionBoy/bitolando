@@ -10,6 +10,9 @@ class Post < ApplicationRecord
   validates :titulo, presence: true
   validates :slug, presence: true, uniqueness: true
   validates :corpo, presence: true
+  validate :imagem_ate_10mb
+
+  IMAGEM_TAMANHO_MAXIMO = 10.megabytes
 
   scope :publicados, -> { joins(:status).where(statuses: { nome: "publicado" }) }
   scope :por_data, -> { order(publicado_em: :desc, created_at: :desc) }
@@ -22,6 +25,14 @@ class Post < ApplicationRecord
   def rascunho?  = status&.rascunho?
 
   private
+
+  def imagem_ate_10mb
+    return unless imagem.attached?
+
+    if imagem.blob.byte_size > IMAGEM_TAMANHO_MAXIMO
+      errors.add(:imagem, "deve ter até 10MB")
+    end
+  end
 
   def gerar_slug
     self.slug = titulo.to_s
