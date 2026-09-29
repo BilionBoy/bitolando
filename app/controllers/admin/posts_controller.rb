@@ -15,13 +15,13 @@ module Admin
 
     def new
       @post = Post.new
-      @post.status = Status.find_by(nome: "rascunho")
     end
 
     def edit; end
 
     def create
       @post = Post.new(post_params)
+      @post.status = status_por_botao_clicado
       @post.publicado_em = Time.current if @post.status&.publicado?
 
       if @post.save
@@ -32,8 +32,8 @@ module Admin
     end
 
     def update
-      @post.publicado_em ||= Time.current if post_params[:status_id].present? &&
-                                              Status.find_by(id: post_params[:status_id])&.publicado?
+      @post.status = status_por_botao_clicado
+      @post.publicado_em ||= Time.current if @post.status&.publicado?
 
       if @post.update(post_params)
         redirect_to admin_posts_path, notice: "Post atualizado."
@@ -54,7 +54,11 @@ module Admin
     end
 
     def post_params
-      params.require(:post).permit(:titulo, :slug, :corpo, :video_url, :imagem, :categoria_id, :status_id, :publicado_em)
+      params.require(:post).permit(:titulo, :slug, :corpo, :video_url, :imagem, :categoria_id, :publicado_em)
+    end
+
+    def status_por_botao_clicado
+      Status.find_by(nome: params[:publicar].present? ? "publicado" : "rascunho")
     end
   end
 end

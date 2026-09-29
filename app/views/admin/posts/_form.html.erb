@@ -44,12 +44,7 @@
     <div class="bito-admin-panel">
       <div class="bito-admin-panel-label">publicação</div>
       <div class="bito-admin-radio">
-        <% Status.ordenados.each do |s| %>
-          <label class="<%= 'active' if post.status_id == s.id %>">
-            <%= f.radio_button :status_id, s.id, id: "status_#{s.id}" %>
-            <span><%= s.nome %></span>
-          </label>
-        <% end %>
+        <span><%= post.status&.nome || "rascunho" %></span>
         <% if post.publicado_em %>
           <div class="meta">em <%= l(post.publicado_em, format: :long) %></div>
         <% end %>
@@ -101,7 +96,8 @@
   <div class="bito-admin-formfoot">
     <%= link_to "cancelar", admin_posts_path, class: "bito-btn ghost" %>
     <div class="right">
-      <%= f.submit "salvar", class: "bito-btn accent" %>
+      <%= f.submit "salvar rascunho", class: "bito-btn" %>
+      <%= f.submit "publicar →", name: "publicar", class: "bito-btn accent" %>
     </div>
   </div>
 <% end %>
