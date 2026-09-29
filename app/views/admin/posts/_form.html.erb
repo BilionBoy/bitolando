@@ -101,9 +101,7 @@
   <div class="bito-admin-formfoot">
     <%= link_to "cancelar", admin_posts_path, class: "bito-btn ghost" %>
     <div class="right">
-      <%= f.submit post.new_record? ? "criar rascunho" : "salvar", class: "bito-btn" %>
-      <%= f.submit post.new_record? ? "publicar agora →" : "publicar →",
-          name: "publicar", class: "bito-btn accent" %>
+      <%= f.submit "salvar", class: "bito-btn accent" %>
     </div>
   </div>
 <% end %>
