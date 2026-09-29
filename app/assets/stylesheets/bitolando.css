@@ -15,19 +15,23 @@
   --fg-fade: #8A8785;
 
   --accent-hue: 65;
-  --accent: oklch(0.52 0.17 var(--accent-hue));
-  --accent-hover: oklch(0.44 0.16 var(--accent-hue));
-  --accent-dim: oklch(0.52 0.17 var(--accent-hue) / 0.10);
-  --accent-line: oklch(0.52 0.17 var(--accent-hue) / 0.35);
+  /* cores em hex/rgba (não oklch): o parser de cor de terceiros (ex: Disqus
+     embed.js) quebra com "Uncaught Error: parseColor received unparseable
+     color: oklch(...)" ao ler getComputedStyle — Chrome moderno devolve o
+     valor computado no formato oklch() literal, e libs antigas não leem. */
+  --accent: #A84B00;
+  --accent-hover: #8A3600;
+  --accent-dim: rgba(168, 75, 0, 0.10);
+  --accent-line: rgba(168, 75, 0, 0.35);
 
-  --warn: oklch(0.55 0.18 30);
-  --warn-dim: oklch(0.55 0.18 30 / 0.12);
+  --warn: #C53829;
+  --warn-dim: rgba(197, 56, 41, 0.12);
 
-  --syn-kw: oklch(0.52 0.16 var(--accent-hue));
-  --syn-str: oklch(0.48 0.12 140);
+  --syn-kw: #A44E00;
+  --syn-str: #346D26;
   --syn-com: var(--fg-soft);
-  --syn-fn: oklch(0.48 0.11 220);
-  --syn-num: oklch(0.50 0.14 30);
+  --syn-fn: #006A88;
+  --syn-num: #A43C2F;
 
   /* ─── TIPOGRAFIA ────────────────────────────────────── */
   --body-size: 18px;
@@ -533,7 +537,7 @@
 .bito-dedicatoria {
   --ded-bg: #1C1B19;
   --ded-fg: #F5F3EE;
-  --ded-accent: oklch(0.78 0.17 var(--accent-hue));
+  --ded-accent: #FF9D19;
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
   gap: var(--s12);
@@ -546,7 +550,7 @@
 [data-theme="dark"] .bito-dedicatoria {
   --ded-bg: #ECE8E0;
   --ded-fg: #1C1B19;
-  --ded-accent: oklch(0.52 0.17 var(--accent-hue));
+  --ded-accent: #A84B00;
 }
 .bito-dedicatoria-cabeca { align-self: start; }
 /* rótulo no mesmo estilo do menu e do rodapé */
@@ -1282,14 +1286,14 @@
   --fg: #F2F2F2;
   --fg-soft: #A0A0A0;
   --fg-fade: #6B6B6B;
-  --accent: oklch(0.78 0.17 var(--accent-hue));
-  --accent-hover: oklch(0.68 0.16 var(--accent-hue));
-  --accent-dim: oklch(0.78 0.17 var(--accent-hue) / 0.14);
-  --accent-line: oklch(0.78 0.17 var(--accent-hue) / 0.40);
-  --syn-kw: oklch(0.78 0.16 var(--accent-hue));
-  --syn-str: oklch(0.74 0.12 140);
-  --syn-fn: oklch(0.78 0.11 220);
-  --syn-num: oklch(0.78 0.14 30);
+  --accent: #FF9D19;
+  --accent-hover: #DA7F00;
+  --accent-dim: rgba(255, 157, 25, 0.14);
+  --accent-line: rgba(255, 157, 25, 0.40);
+  --syn-kw: #FC9F30;
+  --syn-str: #81BD74;
+  --syn-fn: #59C8E8;
+  --syn-num: #FF9381;
   background: var(--bg);
 }
 
