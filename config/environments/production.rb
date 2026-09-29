@@ -55,12 +55,11 @@ Rails.application.configure do
   # config.ssl_options = { redirect: { exclude: ->(request) { request.path == "/up" } } }
 
   # Log pro STDOUT (docker logs -f) e também pro arquivo (tail -f log/production.log)
-  stdout_logger = ActiveSupport::Logger.new(STDOUT)
-  file_logger   = ActiveSupport::Logger.new(Rails.root.join("log", "#{Rails.env}.log"))
-  stdout_logger.extend(ActiveSupport::Logger.broadcast(file_logger))
-  config.logger = stdout_logger
-    .tap  { |logger| logger.formatter = ::Logger::Formatter.new }
-    .then { |logger| ActiveSupport::TaggedLogging.new(logger) }
+  config.logger = ActiveSupport::BroadcastLogger.new(
+    ActiveSupport::Logger.new(STDOUT),
+    ActiveSupport::Logger.new(Rails.root.join("log", "#{Rails.env}.log"))
+  ).tap  { |logger| logger.formatter = ::Logger::Formatter.new }
+   .then { |logger| ActiveSupport::TaggedLogging.new(logger) }
 
   # Prepend all log lines with the following tags.
   config.log_tags = [ :request_id ]
