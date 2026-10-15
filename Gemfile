@@ -18,7 +18,7 @@ gem "devise"
 gem "pagy", "~> 6.5"
 
 # Processamento de imagens (Active Storage variants)
-gem "image_processing", "~> 1.2"
+gem "image_processing", "~> 2.0"
 
 # Formulários com wrappers
 gem "simple_form"
